@@ -14,11 +14,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     // private CustomFuncionarioDetailService customFuncionarioDetailService;
 
-    private static final String[] AUTH_LIST = { "/api", "/funcionarios" };
+    private static final String[] AUTH_LIST = {"/api/login/funcionario", "/api/login/cliente" };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers().permitAll().anyRequest().permitAll();
+        http.csrf().disable().authorizeRequests().antMatchers(AUTH_LIST).permitAll().anyRequest().authenticated();
     }
 
     // @Override

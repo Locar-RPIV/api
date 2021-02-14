@@ -1,5 +1,6 @@
 package com.apirestful.Locar.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -12,6 +13,7 @@ public class ClienteParceiro extends Cliente {
 
     private static final long serialVersionUID = 1L;
 
+    @Column(unique = true)
     private int rg;
 
     public int getRg() {

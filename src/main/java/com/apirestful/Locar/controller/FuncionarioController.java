@@ -21,10 +21,10 @@ public class FuncionarioController {
     @Autowired
     com.apirestful.Locar.repository.FuncionarioRepository funcionarioRepository;
 
-    @GetMapping("/funcionarios")
-    public List<Funcionario> listFuncionarios() {
-        return funcionarioRepository.findAll();
-    }
+    // @GetMapping("/funcionarios")
+    // public List<Funcionario> listFuncionarios() {
+    //     return funcionarioRepository.findAll();
+    // }
 
     // @GetMapping("/funcionarios/{id}")
     // public Funcionario Funcionario(@PathVariable(value = "id") int id) {

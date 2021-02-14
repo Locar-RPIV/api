@@ -3,6 +3,7 @@ package com.apirestful.Locar.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,12 +28,14 @@ public class Funcionario implements Serializable {
     private int id;
 
     @NonNull
+    @Column(unique = true)
     private long cpf;
 
     @NonNull
     private String telefone;
 
     @NonNull
+    @Column(unique = true)
     private long numeroPis;
 
     @NonNull
