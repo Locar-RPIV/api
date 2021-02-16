@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.lang.NonNull;
 
@@ -44,6 +45,15 @@ public class Funcionario implements Serializable {
     @NonNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date dataNascimento;
+
+    @NonNull
+    private String email;
+
+    @NonNull
+    @Column(unique = true)
+    private String senha;
+
+    private boolean admin;
 
     public int getId() {
         return id;
@@ -93,9 +103,24 @@ public class Funcionario implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-    public Funcionario consultFuncionario() {
+    public String getEmail() {
+        return email;
+    }
 
-        return null;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public boolean isAdmin() {
+        return admin;
     }
 
 }
