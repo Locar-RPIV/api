@@ -53,8 +53,6 @@ public class Funcionario implements Serializable {
     @Column(unique = true)
     private String senha;
 
-    private boolean admin;
-
     public int getId() {
         return id;
     }
@@ -117,10 +115,6 @@ public class Funcionario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public boolean isAdmin() {
-        return admin;
     }
 
 }
