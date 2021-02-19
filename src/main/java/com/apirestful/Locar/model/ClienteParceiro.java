@@ -2,16 +2,12 @@ package com.apirestful.Locar.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
  * ClienteParceiro
  */
 @Entity
-@Table(name = "TB_CLIENTE_PARCEIRO")
 public class ClienteParceiro extends Cliente {
-
-    private static final long serialVersionUID = 1L;
 
     @Column(unique = true)
     private int rg;
@@ -23,5 +19,12 @@ public class ClienteParceiro extends Cliente {
     public void setRg(int rg) {
         this.rg = rg;
     }
+
+    // public ClienteParceiro(int id, long cpf, String nome, String telefone, Date dataNascimento, String email,
+    //         String password, int id2, long cnh, boolean admin, int rg) {
+    //     super(id, cpf, nome, telefone, dataNascimento, email, password, id2, cnh, admin);
+    //     this.rg = rg;
+    // }
+
 
 }

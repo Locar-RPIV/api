@@ -6,6 +6,7 @@ import com.apirestful.Locar.model.Cliente;
 import com.apirestful.Locar.model.ClienteParceiro;
 import com.apirestful.Locar.repository.ClienteParceiroRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/funcionario")
 public class ClienteParceiroController {
 
+    @Autowired
     ClienteParceiroRepository clienteParceiroRepository;
 
     @GetMapping("/clientesParceiros")

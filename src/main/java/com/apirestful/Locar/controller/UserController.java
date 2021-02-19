@@ -1,7 +1,7 @@
 package com.apirestful.Locar.controller;
 
-import com.apirestful.Locar.model.Funcionario;
-import com.apirestful.Locar.repository.FuncionarioRepository;
+import com.apirestful.Locar.model.User;
+import com.apirestful.Locar.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,16 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api")
-public class LoginController {
+public class UserController {
 
     @Autowired
-    FuncionarioRepository funcionarioRepository;
+    UserRepository userRepository;
 
-    
     @PostMapping("/login")
-    public Funcionario loginFuncionario(@RequestBody Funcionario funcionario) {
-        return funcionarioRepository.findByEmailAndSenha(funcionario.getEmail(), funcionario.getSenha());
+    public User login(@RequestBody User user) {
+        return userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());    
     }
 
-    
 }
