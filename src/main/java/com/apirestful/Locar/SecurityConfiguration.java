@@ -13,11 +13,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String[] AUTH_LIST = { "/api",
                                                 "/api/login",
-                                                "/api/funcionarios",
-                                                "/api/funcionario",
-                                                "/api/funcionario/cliente",
-                                                "/api/funcionario/clientes",
-                                                "/api/funcionario/clienteParceiro" };
+                                                "/api/todosFuncionarios",
+                                                "/api/todosFuncionarios/{cpf}",
+                                                "/api/inserirFuncionario",
+                                                "/api/apagarFuncionario",
+                                                "/api/editarFuncionario",
+                                                "/api/funcionario/clienteParceiro",
+                                                "/api/todasReservas",
+                                                "/api/inserirReservas",
+                                                "/api/editarReservas",
+                                                "/api/apagarReservas",
+                                                "/api/todasReservas/{cpf}" };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

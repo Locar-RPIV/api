@@ -21,7 +21,7 @@ public class FuncionarioController {
     @Autowired
     com.apirestful.Locar.repository.FuncionarioRepository funcionarioRepository;
 
-    @GetMapping("/funcionarios")
+    @GetMapping("/todosFuncionarios")
     public List<Funcionario> listFuncionarios() {
         return funcionarioRepository.findAll();
     }
@@ -31,22 +31,22 @@ public class FuncionarioController {
     // return funcionarioRepository.findById(id);
     // }
 
-    @GetMapping("/funcionarios/{cpf}")
+    @GetMapping("/todosFuncionarios/{cpf}")
     public Funcionario cpfFuncionario(@PathVariable(value = "cpf") long cpf) {
         return funcionarioRepository.findByCpf(cpf);
     }
 
-    @PostMapping("/funcionario")
+    @PostMapping("/inserirFuncionario")
     public Funcionario saveFuncionario(@RequestBody Funcionario funcionario) {
         return funcionarioRepository.save(funcionario);
     }
 
-    @DeleteMapping("/funcionario")
+    @DeleteMapping("/apagarFuncionario")
     public void deleteFuncionario(@RequestBody Funcionario funcionario) {
         funcionarioRepository.delete(funcionario);
     }
 
-    @PutMapping("/funcionario")
+    @PutMapping("/editarFuncionario")
     public Funcionario refreshFuncionario(@RequestBody Funcionario funcionario) {
         return funcionarioRepository.save(funcionario);
     }

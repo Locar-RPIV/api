@@ -22,27 +22,27 @@ public class ClienteController {
     @Autowired
     ClienteRepository clienteRepository;
 
-    @GetMapping("/clientes")
+    @GetMapping("/todosClientes")
     public List<Cliente> listClientes() {
         return clienteRepository.findAll();
     }
 
-    @GetMapping("/cliente/{cpf}")
+    @GetMapping("/todosCliente/{cpf}")
     public Cliente cpfCliente(@PathVariable(value = "cpf") long cpf) {
         return clienteRepository.findByCpf(cpf);
     }
 
-    @PostMapping("/cliente")
+    @PostMapping("/inserirCliente")
     public Cliente saveCliente(@RequestBody Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
-    @DeleteMapping("/cliente")
+    @DeleteMapping("/apagarCliente")
     public void deleteCliente(@RequestBody Cliente cliente) {
         clienteRepository.delete(cliente);
     }
 
-    @PutMapping("/cliente")
+    @PutMapping("/editarCliente")
     public Cliente refreshCliente(@RequestBody Cliente cliente) {
         return clienteRepository.save(cliente);
     }
