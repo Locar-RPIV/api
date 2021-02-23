@@ -16,6 +16,15 @@ public class Automovel implements Serializable {
     private int id;
 
     @NonNull
+    private String marca;
+
+    @NonNull
+    private String modelo;
+
+    @NonNull
+    private int potencia;
+
+    @NonNull
     private String placa;
 
     @NonNull
@@ -51,6 +60,32 @@ public class Automovel implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @NonNull
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(@NonNull String marca) {
+        this.marca = marca;
+    }
+
+    @NonNull
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(@NonNull String modelo) {
+        this.modelo = modelo;
+    }
+
+    public int getPotencia() {
+        return potencia;
+    }
+
+    public void setPotencia(int potencia) {
+        this.potencia = potencia;
     }
 
     @NonNull
@@ -142,5 +177,22 @@ public class Automovel implements Serializable {
 
     public Automovel verificarKM(){
         return null;
+    }
+
+    public Automovel(int id, @NonNull String marca, @NonNull String modelo, int potencia, @NonNull String placa, @NonNull String cor, int ano, int tipoCombustivel, int numeroPortas, long quilometragem, long renavan, @NonNull String chassi, double valorLocacao, boolean eDeParceiro) {
+        this.id = id;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.potencia = potencia;
+        this.placa = placa;
+        this.cor = cor;
+        this.ano = ano;
+        this.tipoCombustivel = tipoCombustivel;
+        this.numeroPortas = numeroPortas;
+        this.quilometragem = quilometragem;
+        this.renavan = renavan;
+        this.chassi = chassi;
+        this.valorLocacao = valorLocacao;
+        this.eDeParceiro = eDeParceiro;
     }
 }

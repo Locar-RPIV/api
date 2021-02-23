@@ -39,4 +39,17 @@ public class AutomovelController {
         return automovelRepository.save(automovel);
     }
 
+    @GetMapping("/detalhesautomovel")
+    public Automovel detalhesAutomovel(@RequestBody Automovel automovel){
+        automovel.getId();
+        automovel.getMarca();
+        automovel.getModelo();
+        automovel.getPotencia();
+        automovel.getAno();
+        automovel.getQuilometragem();
+        automovel.getValorLocacao();
+
+        return automovel;
+    }
+
 }
