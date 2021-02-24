@@ -18,11 +18,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                                 "/api/employer/client",
                                                 "/api/employer/client/{cpf}",
                                                 "/api/employer/parther",
-                                                "/api/employer/parther/{rg}" };
+                                                "/api/employer/parther/{rg}",
+                                                "http://localhost:8080/swagger-ui.html.#/" };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers(AUTH_LIST).permitAll().anyRequest().authenticated();
+        http.csrf().disable().authorizeRequests().antMatchers(AUTH_LIST).permitAll().anyRequest().permitAll();
     }
 
     @Override

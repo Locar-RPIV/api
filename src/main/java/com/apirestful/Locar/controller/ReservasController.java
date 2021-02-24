@@ -42,7 +42,7 @@ public class ReservasController {
         return reservaRepository.save(reserva);
     }
 
-    @DeleteMapping(value = "reservation")
+    @DeleteMapping(value = "/reservation")
     public void deleteReserva(@RequestBody Reserva reserva) {
         reservaRepository.delete(reserva);
     }
