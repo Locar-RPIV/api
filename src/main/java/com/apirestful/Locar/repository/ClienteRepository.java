@@ -8,5 +8,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     
     Cliente findByCpf(long cpf);
 
-    Cliente findByEmailAndPassword(String email, String password);
+    default void deleteByCpf(long cpf) {
+        delete(findByCpf(cpf));
+    }
+    
 }

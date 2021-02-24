@@ -7,4 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ClienteParceiroRepository extends JpaRepository<ClienteParceiro, Long> {
 
     ClienteParceiro findByRg(int rg);
+
+    default void deleteByRg(int rg) {
+        delete(findByRg(rg));
+    }
+    
 }

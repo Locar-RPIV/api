@@ -22,27 +22,27 @@ public class ReservasController {
     @Autowired
     ReservaRepository reservaRepository;
 
-    @GetMapping(value="/todasReservas")
+    @GetMapping(value="/reservation")
     public List<Reserva> listReservas() {
         return reservaRepository.findAll();
     }
     
-    @GetMapping(value="/todasReservas/{cpf}")
+    @GetMapping(value="/reservation/{cpf}")
     public Reserva cpfReserva(@PathVariable(value = "cpf") long cpf) {
         return reservaRepository.findByCpf(cpf);
     }
     
-    @PostMapping(value="/inserirReservas")
+    @PostMapping(value="/reservation")
     public Reserva saveReserva(@RequestBody Reserva reserva) {
         return reservaRepository.save(reserva);
     }
     
-    @PutMapping(value="/editarReservas")
+    @PutMapping(value="/reservation")
     public Reserva editReserva(@RequestBody Reserva reserva) {        
         return reservaRepository.save(reserva);
     }
 
-    @DeleteMapping(value = "apagarReservas")
+    @DeleteMapping(value = "reservation")
     public void deleteReserva(@RequestBody Reserva reserva) {
         reservaRepository.delete(reserva);
     }

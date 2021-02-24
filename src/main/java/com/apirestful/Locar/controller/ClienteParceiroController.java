@@ -17,33 +17,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/funcionario")
+@RequestMapping(value = "/api/employer")
 public class ClienteParceiroController {
 
     @Autowired
     ClienteParceiroRepository clienteParceiroRepository;
 
-    @GetMapping("/todosClientesParceiros")
+    @GetMapping("/parther")
     public List<ClienteParceiro> listClientes() {
         return clienteParceiroRepository.findAll();
     }
 
-    @GetMapping("/todosClientesParceiros/{rg}")
+    @GetMapping("/parther/{rg}")
     public Cliente cpfCliente(@PathVariable(value = "rg") int rg) {
         return clienteParceiroRepository.findByRg(rg);
     }
 
-    @PostMapping("/inserirClienteParceiro")
+    @PostMapping("/parther")
     public ClienteParceiro saveCliente(@RequestBody ClienteParceiro cliente) {
         return clienteParceiroRepository.save(cliente);
     }
 
-    @DeleteMapping("/apagarClienteParceiro")
-    public void deleteCliente(@RequestBody ClienteParceiro cliente) {
-    clienteParceiroRepository.delete(cliente);
+    @DeleteMapping("/parther/{rg}")
+    public void deleteCliente(@PathVariable(value = "rg") int rg) {
+        clienteParceiroRepository.deleteByRg(rg);
     }
 
-    @PutMapping("/editarClienteParceiro")
+    @PutMapping("/parther")
     public ClienteParceiro refreshClienteParceiro(@RequestBody ClienteParceiro clienteParceiro) {
         return clienteParceiroRepository.save(clienteParceiro);
     }
