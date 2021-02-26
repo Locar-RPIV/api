@@ -23,28 +23,28 @@ public class ClienteParceiroController {
     @Autowired
     ClienteParceiroRepository clienteParceiroRepository;
 
-    @GetMapping("/parther")
+    @GetMapping("/partner")
     public List<ClienteParceiro> listClientes() {
         return clienteParceiroRepository.findAll();
     }
 
-    @GetMapping("/parther/{rg}")
+    @GetMapping("/partner/{rg}")
     public Cliente cpfCliente(@PathVariable(value = "rg") int rg) {
         return clienteParceiroRepository.findByRg(rg);
     }
 
-    @PostMapping("/parther")
+    @PostMapping("/partner")
     public ClienteParceiro saveCliente(@RequestBody ClienteParceiro clienteParceiro) {
         clienteParceiro.setAdmin(false);
         return clienteParceiroRepository.save(clienteParceiro);
     }
 
-    @DeleteMapping("/parther/{rg}")
+    @DeleteMapping("/partner/{rg}")
     public void deleteCliente(@PathVariable(value = "rg") int rg) {
         clienteParceiroRepository.deleteByRg(rg);
     }
 
-    @PutMapping("/parther")
+    @PutMapping("/partner")
     public ClienteParceiro refreshClienteParceiro(@RequestBody ClienteParceiro clienteParceiro) {
         return clienteParceiroRepository.save(clienteParceiro);
     }

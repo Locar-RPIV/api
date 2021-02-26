@@ -17,8 +17,8 @@ public class AuthController {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/login")
-    public User login(@RequestBody Auth auth) {
+    @PostMapping("/auth")
+    public User auth(@RequestBody Auth auth) {
         return userRepository.findByEmailAndPassword(auth.getEmail(), auth.getPassword());    
     }
 

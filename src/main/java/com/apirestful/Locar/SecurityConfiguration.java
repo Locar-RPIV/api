@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String[] AUTH_LIST = { "/api",
-                                                "/api/login",
+                                                "/api/auth",
                                                 "/api/employer",
                                                 "/api/employer/{cpf}",
                                                 "/api/client",
