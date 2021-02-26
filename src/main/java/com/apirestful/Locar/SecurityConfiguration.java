@@ -15,10 +15,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                                 "/api/login",
                                                 "/api/employer",
                                                 "/api/employer/{cpf}",
-                                                "/api/employer/client",
-                                                "/api/employer/client/{cpf}",
-                                                "/api/employer/parther",
-                                                "/api/employer/parther/{rg}",
+                                                "/api/client",
+                                                "/api/client/{cpf}",
+                                                "/api/parther",
+                                                "/api/parther/{rg}",
                                                 "http://localhost:8080/swagger-ui.html.#/" };
 
     @Override
