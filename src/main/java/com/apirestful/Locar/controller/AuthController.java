@@ -1,5 +1,6 @@
 package com.apirestful.Locar.controller;
 
+import com.apirestful.Locar.model.Auth;
 import com.apirestful.Locar.model.User;
 import com.apirestful.Locar.repository.UserRepository;
 
@@ -11,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api")
-public class UserController {
+public class AuthController {
 
     @Autowired
     UserRepository userRepository;
 
     @PostMapping("/login")
-    public User login(@RequestBody User user) {
-        return userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());    
+    public User login(@RequestBody Auth auth) {
+        return userRepository.findByEmailAndPassword(auth.getEmail(), auth.getPassword());    
     }
 
 }

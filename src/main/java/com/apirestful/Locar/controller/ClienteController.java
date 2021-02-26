@@ -34,6 +34,7 @@ public class ClienteController {
 
     @PostMapping("/client")
     public Cliente saveCliente(@RequestBody Cliente cliente) {
+        cliente.setAdmin(false);
         return clienteRepository.save(cliente);
     }
 

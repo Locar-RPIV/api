@@ -34,8 +34,9 @@ public class ClienteParceiroController {
     }
 
     @PostMapping("/parther")
-    public ClienteParceiro saveCliente(@RequestBody ClienteParceiro cliente) {
-        return clienteParceiroRepository.save(cliente);
+    public ClienteParceiro saveCliente(@RequestBody ClienteParceiro clienteParceiro) {
+        clienteParceiro.setAdmin(false);
+        return clienteParceiroRepository.save(clienteParceiro);
     }
 
     @DeleteMapping("/parther/{rg}")

@@ -33,6 +33,7 @@ public class FuncionarioController {
 
     @PostMapping("/employer")
     public Funcionario saveFuncionario(@RequestBody Funcionario funcionario) {
+        funcionario.setAdmin(true);
         return funcionarioRepository.save(funcionario);
     }
 
