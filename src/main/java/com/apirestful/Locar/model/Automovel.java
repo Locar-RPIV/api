@@ -179,7 +179,7 @@ public class Automovel implements Serializable {
         return null;
     }
 
-    public Automovel(int id, @NonNull String marca, @NonNull String modelo, int potencia, @NonNull String placa, @NonNull String cor, int ano, int tipoCombustivel, int numeroPortas, long quilometragem, long renavan, @NonNull String chassi, double valorLocacao, boolean eDeParceiro) {
+    /*public Automovel(int id, @NonNull String marca, @NonNull String modelo, int potencia, @NonNull String placa, @NonNull String cor, int ano, int tipoCombustivel, int numeroPortas, long quilometragem, long renavan, @NonNull String chassi, double valorLocacao, boolean eDeParceiro) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
@@ -195,4 +195,5 @@ public class Automovel implements Serializable {
         this.valorLocacao = valorLocacao;
         this.eDeParceiro = eDeParceiro;
     }
+    */
 }

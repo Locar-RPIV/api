@@ -8,48 +8,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/automovel")
+@RequestMapping(value = "/api")
 public class AutomovelController {
 
     @Autowired
     AutomovelRepository automovelRepository;
+    private Automovel automovel;
 
-    @GetMapping("/getAutomoveis")
+    @GetMapping("/automobile")
     public List<Automovel> listAutomoveis(){
         return automovelRepository.findAll();
     }
 
-    @GetMapping("/Automovel/{id}")
+    @GetMapping("/automobile/{id}")
     public Automovel idAutomovel(@PathVariable(value = "id") int id){
         return automovelRepository.findByid(id);
     }
 
-    @PostMapping("/automovel")
+    @PostMapping("/automobile")
     public Automovel saveAutomovel(@RequestBody Automovel automovel){
+
+        List<Automovel> listAutos = automovelRepository.findAll();
         return automovelRepository.save(automovel);
     }
 
-    @DeleteMapping("/automovel")
+    @DeleteMapping("/automobile")
     public void deleteAutomovel(@RequestBody Automovel automovel){
         automovelRepository.delete(automovel);
     }
 
-    @PutMapping("/automovel")
+    @PutMapping("/automobile")
     public Automovel refreshAutomovel(@RequestBody Automovel automovel){
         return automovelRepository.save(automovel);
     }
-
-    @GetMapping("/detalhesautomovel")
-    public Automovel detalhesAutomovel(@RequestBody Automovel automovel){
-        automovel.getId();
-        automovel.getMarca();
-        automovel.getModelo();
-        automovel.getPotencia();
-        automovel.getAno();
-        automovel.getQuilometragem();
-        automovel.getValorLocacao();
-
-        return automovel;
-    }
-
 }

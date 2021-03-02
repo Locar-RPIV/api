@@ -19,6 +19,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                                 "/api/client/{cpf}",
                                                 "/api/parther",
                                                 "/api/parther/{rg}",
+                                                "/api/automobile",
+                                                "/api/automobile/{id}",
                                                 "http://localhost:8080/swagger-ui.html.#/" };
 
     @Override
