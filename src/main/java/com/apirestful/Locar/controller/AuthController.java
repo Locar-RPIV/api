@@ -1,8 +1,8 @@
 package com.apirestful.Locar.controller;
 
+import com.apirestful.Locar.Services.UserService;
 import com.apirestful.Locar.model.Auth;
 import com.apirestful.Locar.model.User;
-import com.apirestful.Locar.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @PostMapping("/auth")
     public User auth(@RequestBody Auth auth) {
-        return userRepository.findByEmailAndPassword(auth.getEmail(), auth.getPassword());    
+        return userService.auth(auth.getEmail(), auth.getPassword());    
     }
 
 }

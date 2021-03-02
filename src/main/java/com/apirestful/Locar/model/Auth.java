@@ -1,7 +1,7 @@
 package com.apirestful.Locar.model;
 
 public class Auth {
-    
+
     private String email;
 
     private String password;
@@ -22,5 +22,4 @@ public class Auth {
         this.password = password;
     }
 
-    
 }

@@ -19,24 +19,30 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user")
     private int id;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "cpf", length = 11)
     private long cpf;
 
+    @Column(name = "nome")
     private String nome;
 
+    @Column(name = "telefone")
     private String telefone;
 
+    @Column(name = "dataNascimento")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date dataNascimento;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "email")
     private String email;
 
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "admin")
     private boolean admin;
 
 	public String getEmail() {
