@@ -1,5 +1,7 @@
 package com.apirestful.Locar.Services;
 
+import java.util.List;
+
 import com.apirestful.Locar.model.Client;
 import com.apirestful.Locar.repository.ClientRepository;
 
@@ -18,5 +20,17 @@ public class ClientService {
 
     public void deleteByCpf(Long cpf) {
         clientRepository.deleteByCpf(cpf);
+    }
+
+    public List<Client> findAll() {
+        return clientRepository.findAll();
+    }
+
+    public Client save(Client client) {
+        return clientRepository.save(client);
+    }
+
+    public Client findById(int id) {
+        return clientRepository.findById(id);
     }
 }

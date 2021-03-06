@@ -2,6 +2,7 @@ package com.apirestful.Locar.controller;
 
 import java.util.List;
 
+import com.apirestful.Locar.Services.ClientService;
 import com.apirestful.Locar.model.Client;
 import com.apirestful.Locar.repository.ClientRepository;
 
@@ -20,31 +21,36 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClientController {
 
     @Autowired
-    ClientRepository clienteRepository;
+    ClientService clientService;
 
     @GetMapping("/client")
     public List<Client> listClientes() {
-        return clienteRepository.findAll();
+        return clientService.findAll();
     }
 
     @GetMapping("/client/{cpf}")
     public Client cpfCliente(@PathVariable(value = "cpf") long cpf) {
-        return clienteRepository.findByCpf(cpf);
+        return clientService.findByCpf(cpf);
+    }
+
+    @GetMapping("/client/points/{id}")
+    public Client pointsClient(@PathVariable(value = "id") int id) {
+        return clientService.findById(id);
     }
 
     @PostMapping("/client")
     public Client saveCliente(@RequestBody Client cliente) {
         cliente.setAdmin(false);
-        return clienteRepository.save(cliente);
+        return clientService.save(cliente);
     }
 
     @DeleteMapping("/client/{cpf}")
     public void deleteCliente(@PathVariable(value = "cpf") long cpf) {
-        clienteRepository.deleteByCpf(cpf);
+        clientService.deleteByCpf(cpf);
     }
 
     @PutMapping("/client")
     public Client refreshCliente(@RequestBody Client cliente) {
-        return clienteRepository.save(cliente);
+        return clientService.save(cliente);
     }
 }

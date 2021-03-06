@@ -11,4 +11,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     default void deleteByCpf(long cpf) {
         delete(findByCpf(cpf));
     }
+
+    Client findById(int id);
 }

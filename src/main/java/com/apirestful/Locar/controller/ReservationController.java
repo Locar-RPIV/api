@@ -28,7 +28,7 @@ public class ReservationController {
         return reservaService.findAll();
     }
     
-    @GetMapping(value="/reservation/id")
+    @GetMapping(value="/reservation/cpf")
     public List<Reservation> cpfReserva(@RequestBody UserDTO userDto) {
 
         User user = new User();
@@ -36,11 +36,6 @@ public class ReservationController {
 
         return reservaService.findByUser(user);
     }
-
-    // @GetMapping(value="/reservation/{cpf}")
-    // public Reserva cpfReserva(@PathVariable(value = "cpf") long cpf) {
-    //     return reservaService.findByCpf(cpf);
-    // }
     
     @PostMapping(value="/reservation")
     public Reservation saveReserva(@RequestBody Reservation reserva) {  

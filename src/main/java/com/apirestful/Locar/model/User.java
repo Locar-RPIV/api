@@ -45,7 +45,10 @@ public class User {
     @Column(name = "admin")
     private boolean admin;
 
-	public String getEmail() {
+    @Column(name = "pontosFidelidade")
+    private int pontosFidelidade;
+
+    public String getEmail() {
         return email;
     }
 
@@ -109,14 +112,11 @@ public class User {
         this.admin = admin;
     }
 
-    // public User(int id, long cpf, String nome, String telefone, Date dataNascimento, String email, String password) {
-    //     this.id = id;
-    //     this.cpf = cpf;
-    //     this.nome = nome;
-    //     this.telefone = telefone;
-    //     this.dataNascimento = dataNascimento;
-    //     this.email = email;
-    //     this.password = password;
-    // }
+    public long getPontosFidelidade() {
+        return pontosFidelidade;
+    }
 
+    public void setPontosFidelidade(long pontosFidelidade) {
+        this.pontosFidelidade = pontosFidelidade;
+    }
 }
