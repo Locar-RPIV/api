@@ -36,17 +36,17 @@ public class EmployerController {
         return employerService.findByCpf(cpf);
     }
 
-    // @PostMapping("/employer")
-    // public Employer saveFuncionario(@RequestBody Employer employer) {
-    //     employer.setAdmin(true);
-    //     return employerService.save(employer);
-    // }
-
     @PostMapping("/employer")
     public Employer saveFuncionario(@RequestBody Employer employer) {
         employer.setAdmin(true);
-        return employerRepository.save(employer);
+        return employerService.save(employer);
     }
+
+    // @PostMapping("/employer")
+    // public Employer saveFuncionario(@RequestBody Employer employer) {
+    //     employer.setAdmin(true);
+    //     return employerRepository.save(employer);
+    // }
 
     @DeleteMapping("/employer/{cpf}")
     public void deleteFuncionario(@PathVariable(value = "cpf") long cpf) {
