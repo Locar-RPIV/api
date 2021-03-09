@@ -112,11 +112,11 @@ public class User {
         this.admin = admin;
     }
 
-    public long getPontosFidelidade() {
+    public int getPontosFidelidade() {
         return pontosFidelidade;
     }
 
-    public void setPontosFidelidade(long pontosFidelidade) {
+    public void setPontosFidelidade(int pontosFidelidade) {
         this.pontosFidelidade = pontosFidelidade;
     }
 }
