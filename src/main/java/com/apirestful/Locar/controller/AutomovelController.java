@@ -5,6 +5,7 @@ import java.util.List;
 import com.apirestful.Locar.Services.AutomovelService;
 import com.apirestful.Locar.model.Automovel;
 
+import com.apirestful.Locar.repository.AutomovelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 @RequestMapping(value = "/api")
@@ -35,9 +37,13 @@ public class AutomovelController {
 
     @PostMapping("/automobile")
     public Automovel saveAutomovel(@RequestBody Automovel automovel){
-
-        List<Automovel> listAutos = automovelService.findAll();
-        return automovelService.save(automovel);
+        if(automovel.iseDeParceiro() == true){
+            automovel.seteDeParceiro(true);
+        }else {
+            automovel.seteDeParceiro(false);
+        }
+        automovelService.save(automovel);
+        return automovel;
     }
 
     @DeleteMapping("/automobile")
