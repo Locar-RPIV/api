@@ -54,6 +54,17 @@ public class Automovel implements Serializable {
     @NonNull
     private boolean eDeParceiro;
 
+    @NonNull
+    private int filial;
+
+    public int getFilial() {
+        return filial;
+    }
+
+    public void setFilial(int filial) {
+        this.filial = filial;
+    }
+
     public int getId() {
         return id;
     }

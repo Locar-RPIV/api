@@ -5,6 +5,7 @@ import java.util.List;
 import com.apirestful.Locar.model.Automovel;
 import com.apirestful.Locar.repository.AutomovelRepository;
 
+import com.apirestful.Locar.repository.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

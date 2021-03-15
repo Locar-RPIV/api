@@ -5,7 +5,7 @@ import java.util.List;
 import com.apirestful.Locar.Services.AutomovelService;
 import com.apirestful.Locar.model.Automovel;
 
-import com.apirestful.Locar.repository.AutomovelRepository;
+import com.apirestful.Locar.model.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,12 +35,31 @@ public class AutomovelController {
         return automovelService.findById(id);
     }
 
+    @GetMapping("/automobile/{idFilial}")
+    public List<Automovel> AutomoveisFilial(@PathVariable(value = "idFilial") int idFilial){
+        int automovelFilial = automovel.getFilial();
+        if(idFilial == automovelFilial){
+            return (List<Automovel>) automovelService.findById(idFilial);
+        }else return null;
+    }
+
+    @GetMapping("/automobile/{modelo}")
+    public Automovel modeloFilial(@PathVariable(value = "modelo") String modelo){
+        if (modelo == automovel.getModelo()){
+            return automovel;
+        }else return null;
+    }
+
+    @GetMapping("/automobile")
+    public Automovel modeloFilial(){
+        automovel.getModelo();
+
+    }
+
     @PostMapping("/automobile")
     public Automovel saveAutomovel(@RequestBody Automovel automovel){
         if(automovel.iseDeParceiro() == true){
             automovel.seteDeParceiro(true);
-        }else {
-            automovel.seteDeParceiro(false);
         }
         automovelService.save(automovel);
         return automovel;
