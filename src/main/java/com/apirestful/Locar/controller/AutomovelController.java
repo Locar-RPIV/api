@@ -50,11 +50,11 @@ public class AutomovelController {
         }else return null;
     }
 
-    @GetMapping("/automobile")
-    public Automovel modeloFilial(){
-        automovel.getModelo();
+    // @GetMapping("/automobile")
+    // public Automovel modeloFilial(){
+    //     automovel.getModelo();
 
-    }
+    // }
 
     @PostMapping("/automobile")
     public Automovel saveAutomovel(@RequestBody Automovel automovel){
