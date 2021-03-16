@@ -41,7 +41,8 @@ public class ClientController {
 
     @PostMapping("/client")
     public Client saveCliente(@RequestBody Client cliente) {
-        cliente.setAdmin(cliente.isAdmin());
+        cliente.setAdmin(false);
+        cliente.setPartner(cliente.isPartner());
         return clientService.save(cliente);
     }
 
