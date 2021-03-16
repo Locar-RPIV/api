@@ -5,7 +5,6 @@ import java.util.List;
 import com.apirestful.Locar.Services.AutomovelService;
 import com.apirestful.Locar.model.Automovel;
 
-import com.apirestful.Locar.model.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
