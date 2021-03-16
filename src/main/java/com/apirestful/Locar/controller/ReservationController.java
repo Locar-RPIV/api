@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,11 +31,11 @@ public class ReservationController {
         return reservaService.findAll();
     }
     
-    @GetMapping(value="/reservation/cpf")
-    public List<Reservation> cpfReserva(@RequestBody UserDTO userDto) {
+    @GetMapping(value="/reservation/{cpf}")
+    public List<Reservation> cpfReserva(@PathVariable(value = "cpf") int cpf) {
 
         User user = new User();
-        user.setId(userDto.getId());
+        user.setId(cpf);
 
         return reservaService.findByUser(user);
     }
