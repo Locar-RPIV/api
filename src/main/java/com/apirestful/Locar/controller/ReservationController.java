@@ -2,7 +2,6 @@ package com.apirestful.Locar.controller;
 
 import java.util.List;
 
-import com.apirestful.Locar.DTO.UserDTO;
 import com.apirestful.Locar.Services.ReservationService;
 import com.apirestful.Locar.model.Reservation;
 import com.apirestful.Locar.model.User;
@@ -34,21 +33,17 @@ public class ReservationController {
     @GetMapping(value="/reservation/{cpf}")
     public List<Reservation> cpfReserva(@PathVariable(value = "cpf") int cpf) {
 
-        User user = new User();
-        user.setId(cpf);
+        User user = reservaService.findByCpf(cpf);
 
         return reservaService.findByUser(user);
     }
     
     @PostMapping(value="/reservation")
-    public Reservation saveReserva(@RequestBody Reservation reserva) {  
-        
-        Reservation reservation = new Reservation();
-        reservation.setPlaca(reserva.getPlaca());
-        reservation.setDataRetirada(reserva.getDataRetirada());
-        reservation.setUser(reserva.getUser());
-        
-        return reservaService.save(reservation);
+    public Reservation saveReserva(@RequestBody Reservation reserva) {
+        long clientCpf = reserva.getUser().getCpf();
+        User user = reservaService.findByCpf(clientCpf);
+        reserva.setUser(user);
+        return reservaService.save(reserva);
     }
     
     @PutMapping(value="/reservation")
