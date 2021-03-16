@@ -59,9 +59,6 @@ public class AutomovelController {
 
     @PostMapping("/automobile")
     public Automovel saveAutomovel(@RequestBody Automovel automovel){
-        if(automovel.iseDeParceiro() == true){
-            automovel.seteDeParceiro(true);
-        }
         automovelService.save(automovel);
         return automovel;
     }
