@@ -31,6 +31,11 @@ public class AutomovelController {
         return automovelService.findAll();
     }
 
+    @GetMapping("/automobile/partner/{cpfParceiro}")
+    public List<Automovel> idAutomovel(@PathVariable(value = "cpfParceiro") long cpfParceiro){
+        return automovelService.findByCpfParceiro(cpfParceiro);
+    }
+
     @GetMapping("/automobile/{id}")
     public Automovel idAutomovel(@PathVariable(value = "id") int id){
         return automovelService.findById(id);

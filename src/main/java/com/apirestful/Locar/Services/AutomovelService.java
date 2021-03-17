@@ -17,6 +17,10 @@ public class AutomovelService {
     public Automovel findById(int id) {
         return automovelRepository.findByid(id);
     }
+    
+    public List<Automovel> findByCpfParceiro(long cpfParceiro) {
+        return automovelRepository.findByCpfParceiro(cpfParceiro);
+    }
 
     public List<Automovel> findAll() {
         return automovelRepository.findAll();

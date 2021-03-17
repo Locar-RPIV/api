@@ -54,11 +54,21 @@ public class Automovel implements Serializable {
     @NonNull
     private boolean carroParceiro;
 
+    private long cpfParceiro;
+
     @NonNull
     private int filial;
 
     @NonNull
     private String imageUrl;
+
+    public long getCpfParceiro() {
+        return cpfParceiro;
+    }
+    
+    public long setCpfParceiro() {
+        return cpfParceiro;
+    }
 
     public String getImageUrl() {
         return imageUrl;
