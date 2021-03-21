@@ -14,7 +14,6 @@ public class BranchController {
 
     @Autowired
     BranchService branchService;
-    private Branch branch;
 
     @GetMapping("/branch")
     public List<Branch> listaFiliais(){
