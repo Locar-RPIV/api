@@ -65,7 +65,7 @@ public class PartnerController {
         Response response = new Response();
         try {
             if (partner == null) {
-                response.setMessage("Parceiro não econtrado!");
+                response.setMessage("Parceiro nao econtrado!");
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
             }
             if (payPartner.getValue() < 0) {

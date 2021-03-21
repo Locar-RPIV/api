@@ -31,7 +31,7 @@ public class AuthController {
         Response response = new Response();
         try {
             if (user == null) {
-                response.setMessage("Usuário incorreto.");
+                response.setMessage("Usuario incorreto.");
                 return (Any) new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
             if (BCrypt.checkpw(user.getPassword(), password)) {
