@@ -1,7 +1,6 @@
 package com.apirestful.Locar.controller;
 
 import com.apirestful.Locar.Services.BranchService;
-import com.apirestful.Locar.model.Automovel;
 import com.apirestful.Locar.model.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,6 @@ public class BranchController {
 
     @Autowired
     BranchService branchService;
-    private Branch branch;
 
     @GetMapping("/branch")
     public List<Branch> listaFiliais(){

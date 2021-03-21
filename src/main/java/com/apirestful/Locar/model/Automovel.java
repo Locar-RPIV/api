@@ -52,10 +52,31 @@ public class Automovel implements Serializable {
     private double valorLocacao;
 
     @NonNull
-    private boolean eDeParceiro;
+    private boolean carroParceiro;
+
+    private long cpfParceiro;
 
     @NonNull
     private int filial;
+
+    @NonNull
+    private String imageUrl;
+
+    public long getCpfParceiro() {
+        return cpfParceiro;
+    }
+    
+    public long setCpfParceiro() {
+        return cpfParceiro;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public int getFilial() {
         return filial;
@@ -174,12 +195,12 @@ public class Automovel implements Serializable {
         this.valorLocacao = valorLocacao;
     }
 
-    public boolean iseDeParceiro() {
-        return eDeParceiro;
+    public boolean getCarroParceiro() {
+        return carroParceiro;
     }
 
-    public void seteDeParceiro(boolean eDeParceiro) {
-        this.eDeParceiro = eDeParceiro;
+    public void setCarroParceiro(boolean carroParceiro) {
+        this.carroParceiro = carroParceiro;
     }
 
     public Automovel consultar(){

@@ -20,6 +20,8 @@ public class Client extends User  {
     @Column(unique = true, name = "cnh", length = 11)
     private long cnh;
 
+    @Column(name = "isPartner")
+    private boolean isPartner;
 
     public int getId() {
         return id;
@@ -31,6 +33,14 @@ public class Client extends User  {
 
     public long getCnh() {
         return cnh;
+    }
+
+    public void setPartner(boolean partner) {
+        this.isPartner = partner;
+    }
+
+    public boolean isPartner() {
+        return isPartner;
     }
 
     public void setCnh(long cnh) {

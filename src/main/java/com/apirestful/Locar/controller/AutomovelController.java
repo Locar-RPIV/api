@@ -5,7 +5,6 @@ import java.util.List;
 import com.apirestful.Locar.Services.AutomovelService;
 import com.apirestful.Locar.model.Automovel;
 
-import com.apirestful.Locar.model.Branch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,11 +31,17 @@ public class AutomovelController {
         return automovelService.findAll();
     }
 
+    @GetMapping("/automobile/partner/{cpfParceiro}")
+    public List<Automovel> idAutomovel(@PathVariable(value = "cpfParceiro") long cpfParceiro){
+        return automovelService.findByCpfParceiro(cpfParceiro);
+    }
+
     @GetMapping("/automobile/{id}")
     public Automovel idAutomovel(@PathVariable(value = "id") int id){
         return automovelService.findById(id);
     }
 
+    @SuppressWarnings("unchecked")
     @GetMapping("/automobile/{idFilial}")
     public List<Automovel> AutomoveisFilial(@PathVariable(value = "idFilial") int idFilial){
         int automovelFilial = automovel.getFilial();
@@ -60,9 +65,6 @@ public class AutomovelController {
 
     @PostMapping("/automobile")
     public Automovel saveAutomovel(@RequestBody Automovel automovel){
-        if(automovel.iseDeParceiro() == true){
-            automovel.seteDeParceiro(true);
-        }
         automovelService.save(automovel);
         return automovel;
     }

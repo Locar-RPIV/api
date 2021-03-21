@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.apirestful.Locar.Services.ClientService;
 import com.apirestful.Locar.model.Client;
-import com.apirestful.Locar.repository.ClientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -43,6 +42,7 @@ public class ClientController {
     @PostMapping("/client")
     public Client saveCliente(@RequestBody Client cliente) {
         cliente.setAdmin(false);
+        cliente.setPartner(cliente.isPartner());
         return clientService.save(cliente);
     }
 
