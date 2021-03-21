@@ -41,6 +41,7 @@ public class AutomovelController {
         return automovelService.findById(id);
     }
 
+    @SuppressWarnings("unchecked")
     @GetMapping("/automobile/{idFilial}")
     public List<Automovel> AutomoveisFilial(@PathVariable(value = "idFilial") int idFilial){
         int automovelFilial = automovel.getFilial();
