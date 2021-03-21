@@ -5,6 +5,7 @@ import java.util.List;
 import com.apirestful.Locar.model.Automovel;
 import com.apirestful.Locar.repository.AutomovelRepository;
 
+import com.apirestful.Locar.repository.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,6 @@ public class AutomovelService {
 
     public Automovel findById(int id) {
         return automovelRepository.findByid(id);
-    }
-    
-    public List<Automovel> findByCpfParceiro(long cpfParceiro) {
-        return automovelRepository.findByCpfParceiro(cpfParceiro);
     }
 
     public List<Automovel> findAll() {
