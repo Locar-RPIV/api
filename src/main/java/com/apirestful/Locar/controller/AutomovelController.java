@@ -56,6 +56,13 @@ public class AutomovelController {
             return automovel;
         }else return null;
     }
+    
+    @GetMapping("/automobile/{status}")
+    public Automovel statusAutomovel(@PathVariable(value = "status") String status){
+        if (status == automovel.getStatus()){
+            return automovel;
+        }else return null;
+    }
 
     // @GetMapping("/automobile")
     // public Automovel modeloFilial(){
