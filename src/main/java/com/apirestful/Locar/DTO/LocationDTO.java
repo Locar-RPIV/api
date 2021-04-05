@@ -29,6 +29,8 @@ public class LocationDTO {
     private long quilometragemLocacao;
     
     private long quilometragemDevolucao;
+    
+    private float duracao;
 
     public Date getDataLocacao() {
         return dataLocacao;
@@ -101,4 +103,12 @@ public class LocationDTO {
 	public void setQuilometragemDevolucao(long quilometragemDevolucao) {
 		this.quilometragemDevolucao = quilometragemDevolucao;
 	}
+	
+    public float getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(float duracao) {
+        this.duracao = duracao;
+    }
 }

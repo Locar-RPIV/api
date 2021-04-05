@@ -32,11 +32,11 @@ public class Location {
     private String placa;
 
     @Column(name = "dataLocacao")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private Date dataLocacao;
     
     @Column(name = "dataDevolucao")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private Date dataDevolucao;
     
     @NonNull
@@ -53,6 +53,8 @@ public class Location {
     
     @NonNull
     private long quilometragemDevolucao;
+    
+    private float duracao;
 
     public int getId() {
         return id;
@@ -132,6 +134,24 @@ public class Location {
 
     public void setUser(User user) {
         this.user = user;
+    }
+    
+    public float getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(float duracao) {
+        this.duracao = duracao;
+    }
+    
+    public float CalculoDuracao(Date dataDevolucao, Date dataLocacao) {
+    	duracao = dataDevolucao.getTime() - dataLocacao.getTime();
+        return duracao;
+    } 
+    
+    public double Calculo(double valorLocacao, double duracao, double valorCaucao) {
+    	valorTotal = (valorLocacao * duracao) - valorCaucao;
+        return valorTotal;
     }
 
     
