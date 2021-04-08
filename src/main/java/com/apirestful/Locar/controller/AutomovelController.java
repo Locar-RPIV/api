@@ -41,27 +41,15 @@ public class AutomovelController {
         return automovelService.findById(id);
     }
 
-    @SuppressWarnings("unchecked")
-    @GetMapping("/automobile/{idFilial}")
-    public List<Automovel> AutomoveisFilial(@PathVariable(value = "idFilial") int idFilial){
-        int automovelFilial = automovel.getFilial();
-        if(idFilial == automovelFilial){
-            return (List<Automovel>) automovelService.findById(idFilial);
-        }else return null;
+    @GetMapping("/automobile/filial/{id}")
+    public List<Automovel> AutomoveisFilial(@PathVariable(value = "id") int id){
+        return automovelService.findByFilial(id);
     }
-
-    @GetMapping("/automobile/{modelo}")
-    public Automovel modeloFilial(@PathVariable(value = "modelo") String modelo){
-        if (modelo == automovel.getModelo()){
-            return automovel;
-        }else return null;
+    
+    @GetMapping("/automobile/modelo/{modelo}")
+    public List<Automovel> modeloFilial(@PathVariable(value = "modelo") String modelo){
+        return automovelService.findByModelo(modelo);
     }
-
-    // @GetMapping("/automobile")
-    // public Automovel modeloFilial(){
-    //     automovel.getModelo();
-
-    // }
 
     @PostMapping("/automobile")
     public Automovel saveAutomovel(@RequestBody Automovel automovel){
@@ -69,9 +57,9 @@ public class AutomovelController {
         return automovel;
     }
 
-    @DeleteMapping("/automobile")
-    public void deleteAutomovel(@RequestBody Automovel automovel){
-        automovelService.delete(automovel);
+    @DeleteMapping("/automobile/{id}")
+    public void deleteAutomovel(@PathVariable(value = "id") int id){
+        automovelService.deleteById(id);
     }
 
     @PutMapping("/automobile")
