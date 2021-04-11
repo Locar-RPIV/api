@@ -11,4 +11,9 @@ public interface LocationRepository extends JpaRepository<Location, Long>{
     
     List<Location> findByUser(User user);
 
+    Location findById(int id);
+
+    default void deleteById(int id) {
+        delete(findById(id));
+    }
 }

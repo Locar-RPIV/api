@@ -49,8 +49,15 @@ public class PartnerController {
     }
 
     @DeleteMapping("/partner/{rg}")
-    public void deleteCliente(@PathVariable(value = "rg") int rg) {
-        partnerService.deleteByRg(rg);
+    public <Any> Any deleteCliente(@PathVariable(value = "rg") int rg) {
+        Response response = new Response();
+        try {
+            partnerService.deleteByRg(rg);
+            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            response.setMessage("Erro interno");
+            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/partner")

@@ -40,4 +40,8 @@ public class ReservationService {
     public void delete(Reservation s) {
         reservationRepository.delete(s);
     }
+
+    public void deleteById(int id) {
+        reservationRepository.deleteById(id);
+    }
 }

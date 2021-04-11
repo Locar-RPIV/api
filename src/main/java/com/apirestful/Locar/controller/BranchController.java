@@ -41,11 +41,11 @@ public class BranchController {
         return branchService.save(branch);
     }
 
-    @DeleteMapping("/branch")
-    public <Any> Any deleteBranch(@RequestBody Branch branch){
+    @DeleteMapping("/branch/{id}")
+    public <Any> Any deleteBranch(@PathVariable(value = "id")int id){
         Response response = new Response();
         try {
-            branchService.delete(branch);
+            branchService.deleteById(id);
             return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             response.setMessage("Erro interno.");

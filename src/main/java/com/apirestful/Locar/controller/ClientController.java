@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.apirestful.Locar.Services.ClientService;
 import com.apirestful.Locar.model.Client;
-import com.apirestful.Locar.model.ClientNoPrivateData;
 import com.apirestful.Locar.model.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,8 +76,16 @@ public class ClientController {
     }
 
     @DeleteMapping("/client/{cpf}")
-    public void deleteCliente(@PathVariable(value = "cpf") long cpf) {
-        clientService.deleteByCpf(cpf);
+    public <Any> Any deleteCliente(@PathVariable(value = "cpf") long cpf) {
+        Response response = new Response();
+        try {
+            clientService.deleteByCpf(cpf);
+            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            response.setMessage("Erro interno");
+            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @PutMapping("/client")

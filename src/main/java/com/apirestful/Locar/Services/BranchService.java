@@ -29,4 +29,8 @@ public class BranchService {
         branchRepository.delete(branch);
     }
 
+    public void deleteById(int id) {
+        branchRepository.deleteById(id);
+    }
+
 }

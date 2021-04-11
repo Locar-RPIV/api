@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.apirestful.Locar.Services.EmployerService;
 import com.apirestful.Locar.model.Employer;
-import com.apirestful.Locar.repository.EmployerRepository;
+import com.apirestful.Locar.model.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +27,6 @@ public class EmployerController {
     @Autowired
     EmployerService employerService;
 
-    @Autowired
-    EmployerRepository employerRepository;
-
     @GetMapping("/employer")
     public List<Employer> listFuncionarios() {
         return employerService.findAll();
@@ -44,15 +43,16 @@ public class EmployerController {
         return employerService.save(employer);
     }
 
-    // @PostMapping("/employer")
-    // public Employer saveFuncionario(@RequestBody Employer employer) {
-    //     employer.setAdmin(true);
-    //     return employerRepository.save(employer);
-    // }
-
     @DeleteMapping("/employer/{cpf}")
-    public void deleteFuncionario(@PathVariable(value = "cpf") long cpf) {
-        employerService.deleteByCpf(cpf);
+    public <Any> Any deleteFuncionario(@PathVariable(value = "cpf") long cpf) {
+        Response response = new Response();
+        try {
+            employerService.deleteByCpf(cpf);
+            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            response.setMessage("Erro interno");
+            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/employer")

@@ -40,4 +40,8 @@ public class LocationService {
     public void delete(Location l) {
     	locationRepository.delete(l);
     }
+
+    public void deleteById(int id) {
+        locationRepository.deleteById(id);
+    }
 }
