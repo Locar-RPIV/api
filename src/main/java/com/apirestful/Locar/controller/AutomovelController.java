@@ -4,8 +4,11 @@ import java.util.List;
 
 import com.apirestful.Locar.Services.AutomovelService;
 import com.apirestful.Locar.model.Automovel;
+import com.apirestful.Locar.model.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+@SuppressWarnings("unchecked")
 @RestController
 @RequestMapping(value = "/api")
 @CrossOrigin(origins = "*")
@@ -27,8 +31,14 @@ public class AutomovelController {
     private Automovel automovel;
 
     @GetMapping("/automobile")
-    public List<Automovel> listAutomoveis(){
-        return automovelService.findAll();
+    public <Any> Any listAutomoveis(){
+        Response response = new Response();
+        try {
+            return (Any) automovelService.findAll();
+        } catch (Exception e) {
+            response.setMessage("Erro interno.");
+            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/automobile/partner/{cpfParceiro}")
@@ -59,18 +69,39 @@ public class AutomovelController {
     }
 
     @PostMapping("/automobile")
-    public Automovel saveAutomovel(@RequestBody Automovel automovel){
-        automovelService.save(automovel);
-        return automovel;
+    public <Any> Any saveAutomovel(@RequestBody Automovel automovel){
+        Response response = new Response();
+        try {
+            automovelService.save(automovel);
+            
+        } catch (Exception e) {
+            response.setMessage("Erro interno.");
+            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return (Any) automovel;
     }
 
     @DeleteMapping("/automobile/{id}")
-    public void deleteAutomovel(@PathVariable(value = "id") int id){
-        automovelService.deleteById(id);
+    public <Any> Any deleteAutomovel(@PathVariable(value = "id") int id){
+        Response response = new Response();
+        try {
+            automovelService.deleteById(id);
+            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            response.setMessage("Erro interno.");
+            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/automobile")
-    public Automovel refreshAutomovel(@RequestBody Automovel automovel){
-        return automovelService.save(automovel);
+    public <Any> Any refreshAutomovel(@RequestBody Automovel automovel){
+        Response response = new Response();
+        try {
+            automovelService.save(automovel);
+            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            response.setMessage("Erro interno.");
+            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
