@@ -15,7 +15,15 @@ public class AutomovelService {
     AutomovelRepository automovelRepository;
 
     public Automovel findById(int id) {
-        return automovelRepository.findByid(id);
+        return automovelRepository.findById(id);
+    }
+
+    public List<Automovel> findByFilial(int filial) {
+        return automovelRepository.findByFilial(filial);
+    }
+
+    public List<Automovel> findByModelo(String modelo) {
+        return automovelRepository.findByModelo(modelo);
     }
     
     public List<Automovel> findByCpfParceiro(long cpfParceiro) {
@@ -30,7 +38,7 @@ public class AutomovelService {
         return automovelRepository.save(automovel);
     }
 
-    public void delete(Automovel automovel) {
-        automovelRepository.delete(automovel);
+    public void deleteById(int id) {
+        automovelRepository.deleteById(id);
     }
 }
