@@ -32,24 +32,24 @@ public class PartnerController {
     PartnerService partnerService;
 
     @GetMapping("/partner")
-    public List<Partner> listClientes() {
+    public List<Partner> listPartners() {
         return partnerService.findAll();
     }
 
     @GetMapping("/partner/{rg}")
-    public Client cpfCliente(@PathVariable(value = "rg") int rg) {
+    public Client cpfPartner(@PathVariable(value = "rg") int rg) {
         return partnerService.findByRg(rg);
     }
 
     @PostMapping("/partner")
-    public Partner saveCliente(@RequestBody Partner partner) {
+    public Partner savePartner(@RequestBody Partner partner) {
         partner.setAdmin(false);
         partner.setPartner(true);
         return partnerService.save(partner);
     }
 
     @DeleteMapping("/partner/{rg}")
-    public <Any> Any deleteCliente(@PathVariable(value = "rg") int rg) {
+    public <Any> Any deletePartner(@PathVariable(value = "rg") int rg) {
         Response response = new Response();
         try {
             partnerService.deleteByRg(rg);
@@ -61,8 +61,40 @@ public class PartnerController {
     }
 
     @PutMapping("/partner")
-    public Partner refreshClienteParceiro(@RequestBody Partner partner) {
-        return partnerService.save(partner);
+    public <Any> Any refreshPartner(@RequestBody Partner partner) {
+        Response response = new Response();
+        try {
+            Partner updatePartner = partnerService.findById(partner.getId());
+            if (partner.getCpf() > 0) 
+                updatePartner.setCpf(partner.getCpf());
+            if (partner.getNome() != null)
+                updatePartner.setNome(partner.getNome());
+            if (partner.getTelefone() != null)
+                updatePartner.setTelefone(partner.getTelefone());
+            if (partner.getDataNascimento() != null)
+                updatePartner.setDataNascimento(partner.getDataNascimento());
+            if (partner.getEmail() != null)
+                updatePartner.setEmail(partner.getEmail());
+            if  (partner.getPassword() != null)
+                updatePartner.setPassword(partner.getPassword());
+            if (partner.getPontosFidelidade() >= 0)
+                updatePartner.setPontosFidelidade(partner.getPontosFidelidade());
+            if (partner.getCnh() >= 0)
+                updatePartner.setCnh(partner.getCnh());
+            if (partner.getRg() > 0)
+                updatePartner.setRg(partner.getRg());
+            if (partner.getIsPartner()) {
+                updatePartner.setPartner(partner.getIsPartner());
+            } else {
+                updatePartner.setPartner(false);
+            }
+        
+            partnerService.save(updatePartner);
+            return (Any) new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            response.setMessage("Erro interno.");
+            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @SuppressWarnings("rawtypes")

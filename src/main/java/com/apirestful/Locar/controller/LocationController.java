@@ -24,41 +24,70 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api")
 @CrossOrigin(origins = "*")
 public class LocationController {
-    
-    @Autowired
-    LocationService LocacaoService;
 
-    @GetMapping(value="/location")
+    @Autowired
+    LocationService locacaoService;
+
+    @GetMapping(value = "/location")
     public List<Location> listLocacoes() {
-        return LocacaoService.findAll();
+        return locacaoService.findAll();
     }
-    
-    @GetMapping(value="/location/{cpf}")
+
+    @GetMapping(value = "/location/{cpf}")
     public List<Location> cpfLocacao(@PathVariable(value = "cpf") int cpf) {
 
-        User user = LocacaoService.findByCpf(cpf);
+        User user = locacaoService.findByCpf(cpf);
 
-        return LocacaoService.findByUser(user);
+        return locacaoService.findByUser(user);
     }
-    
-    @PostMapping(value="/location")
+
+    @PostMapping(value = "/location")
     public Location saveLocacao(@RequestBody Location locacao) {
         long clientCpf = locacao.getUser().getCpf();
-        User user = LocacaoService.findByCpf(clientCpf);
+        User user = locacaoService.findByCpf(clientCpf);
         locacao.setUser(user);
-        return LocacaoService.save(locacao);
+        return locacaoService.save(locacao);
     }
-    
+
     @PutMapping(value="/location")
-    public Location editLocacao(@RequestBody Location locacao) {        
-        return LocacaoService.save(locacao);
+    public <Any> Any editLocacao(@RequestBody Location locacao) {
+        Response response = new Response();
+        try {
+            Location updateLocation = locacaoService.findById(locacao.getId());
+            if (locacao.getUser() != null)
+                updateLocation.setUser(locacao.getUser());
+            if (locacao.getPlaca() != null)
+                updateLocation.setPlaca(locacao.getPlaca());
+            if (locacao.getDataLocacao() != null)
+                updateLocation.setDataLocacao(locacao.getDataLocacao());
+            if (locacao.getDataDevolucao() != null)
+                updateLocation.setDataDevolucao(locacao.getDataDevolucao());
+            if (locacao.getValorLocacao() > 0)
+                updateLocation.setValorLocacao(locacao.getValorLocacao());
+            if (locacao.getValorCaucao() > 0)
+                updateLocation.setValorCaucao(locacao.getValorCaucao());
+            if (locacao.getValorTotal() > 0)
+                updateLocation.setValorTotal(locacao.getValorTotal());
+            if (locacao.getQuilometragemLocacao() >= 0)
+                updateLocation.setQuilometragemLocacao(locacao.getQuilometragemLocacao());
+            if (locacao.getQuilometragemDevolucao() >= 0)
+                updateLocation.setQuilometragemDevolucao(locacao.getQuilometragemDevolucao());
+            if (locacao.getDuracao() >= 0.0)
+                updateLocation.setDuracao(locacao.getDuracao());    
+        
+            locacaoService.save(updateLocation);
+            return (Any) new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            response.setMessage("Erro interno.");
+            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping(value = "/location/{id}")
     public <Any> Any deleteLocacao(@PathVariable(value = "id") int id) {
         Response response = new Response();
         try {
-            LocacaoService.deleteById(id);
+            locacaoService.deleteById(id);
             return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             response.setMessage("Erro interno.");

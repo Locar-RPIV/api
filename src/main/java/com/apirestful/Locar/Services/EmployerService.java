@@ -18,6 +18,10 @@ public class EmployerService {
         return employerRepository.findByCpf(cpf);
     }
 
+    public Employer findById(int id) {
+        return employerRepository.findById(id);
+    }
+
     public void deleteByCpf(Long cpf) {
         employerRepository.deleteByCpf(cpf);
     }

@@ -11,4 +11,6 @@ public interface EmployerRepository extends JpaRepository<Employer, Long> {
     default void deleteByCpf(long cpf) {
         delete(findByCpf(cpf));
     }
+
+    Employer findById(int id);
 }

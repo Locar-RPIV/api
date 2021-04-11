@@ -29,6 +29,10 @@ public class LocationService {
         return clientRepository.findByCpf(cpf);
     }
 
+    public Location findById(int id) {
+        return locationRepository.findById(id);
+    }
+
     public List<Location> findAll() {
         return locationRepository.findAll();
     }

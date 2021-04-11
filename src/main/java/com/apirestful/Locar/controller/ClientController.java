@@ -89,7 +89,39 @@ public class ClientController {
     }
 
     @PutMapping("/client")
-    public Client refreshCliente(@RequestBody Client cliente) {
-        return clientService.save(cliente);
+    public <Any> Any refreshCliente(@RequestBody Client cliente) {
+        Response response = new Response();
+        try {
+            Client updateClient = clientService.findById(cliente.getId());
+            if (cliente.getCpf() > 0) 
+                updateClient.setCpf(cliente.getCpf());
+            if (cliente.getNome() != null)
+                updateClient.setNome(cliente.getNome());
+            if (cliente.getTelefone() != null)
+                updateClient.setTelefone(cliente.getTelefone());
+            if (cliente.getDataNascimento() != null)
+                updateClient.setDataNascimento(cliente.getDataNascimento());
+            if (cliente.getEmail() != null)
+                updateClient.setEmail(cliente.getEmail());
+            if  (cliente.getPassword() != null)
+                updateClient.setPassword(cliente.getPassword());
+            if (cliente.getPontosFidelidade() >= 0)
+                updateClient.setPontosFidelidade(cliente.getPontosFidelidade());
+            if (cliente.getCnh() >= 0)
+                updateClient.setCnh(cliente.getCnh());
+            if (cliente.getIsPartner()) {
+                updateClient.setPartner(cliente.getIsPartner());
+            } else {
+                updateClient.setPartner(false);
+            }
+
+            clientService.save(updateClient);
+            return (Any) new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            response.setMessage("Erro interno.");
+            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
     }
 }

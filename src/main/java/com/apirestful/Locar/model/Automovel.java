@@ -69,8 +69,8 @@ public class Automovel implements Serializable {
         return cpfParceiro;
     }
     
-    public long setCpfParceiro() {
-        return cpfParceiro;
+    public void setCpfParceiro(long cpfParceiro) {
+        this.cpfParceiro = cpfParceiro;
     }
 
     public String getImageUrl() {
