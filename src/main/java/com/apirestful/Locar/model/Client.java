@@ -34,18 +34,23 @@ public class Client extends User  {
     public long getCnh() {
         return cnh;
     }
+    
+    public void setCnh(long cnh) {
+        this.cnh = cnh;
+    }
 
     public void setPartner(boolean partner) {
         this.isPartner = partner;
+    }
+
+    public boolean getIsPartner() {
+        return isPartner;
     }
 
     public boolean isPartner() {
         return isPartner;
     }
 
-    public void setCnh(long cnh) {
-        this.cnh = cnh;
-    }
 
     // public Cliente(int id, long cpf, String nome, String telefone, Date dataNascimento, String email, String password,
     //         int id2, long cnh, boolean admin) {

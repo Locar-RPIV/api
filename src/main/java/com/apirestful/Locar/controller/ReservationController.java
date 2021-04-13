@@ -4,9 +4,12 @@ import java.util.List;
 
 import com.apirestful.Locar.Services.ReservationService;
 import com.apirestful.Locar.model.Reservation;
+import com.apirestful.Locar.model.Response;
 import com.apirestful.Locar.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,13 +50,35 @@ public class ReservationController {
     }
     
     @PutMapping(value="/reservation")
-    public Reservation editReserva(@RequestBody Reservation reserva) {        
-        return reservaService.save(reserva);
+    public <Any> Any editReserva(@RequestBody Reservation reserva) {  
+        Response response = new Response();
+        try {
+            Reservation updateReservation = reservaService.findById(reserva.getId());
+            if (reserva.getUser() != null)
+                updateReservation.setUser(reserva.getUser());
+            if (reserva.getPlaca() != null)
+                updateReservation.setPlaca(reserva.getPlaca());
+            if (reserva.getDataRetirada() != null)
+                updateReservation.setDataRetirada(reserva.getDataRetirada());
+
+            reservaService.save(updateReservation);
+            return (Any) new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            response.setMessage("Erro interno.");
+            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }  
     }
 
-    @DeleteMapping(value = "/reservation")
-    public void deleteReserva(@RequestBody Reservation reserva) {
-        reservaService.delete(reserva);
+    @DeleteMapping(value = "/reservation/{id}")
+    public <Any> Any deleteReserva(@PathVariable(value = "id") int id) {
+        Response response = new Response();
+        try {
+            reservaService.deleteById(id);
+            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            response.setMessage("Erro interno.");
+            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

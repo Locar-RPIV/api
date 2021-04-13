@@ -23,6 +23,10 @@ public class PartnerService {
         return partnerRepository.findByRg(rg);
     }
 
+    public Partner findById(int id) {
+        return partnerRepository.findById(id);
+    }
+
     public void deleteByRg(int rg) {
         partnerRepository.deleteByRg(rg);
     }

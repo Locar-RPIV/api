@@ -29,6 +29,10 @@ public class ReservationService {
         return clientRepository.findByCpf(cpf);
     }
 
+    public Reservation findById(int id) {
+        return reservationRepository.findById(id);
+    }
+
     public List<Reservation> findAll() {
         return reservationRepository.findAll();
     }
@@ -39,5 +43,9 @@ public class ReservationService {
 
     public void delete(Reservation s) {
         reservationRepository.delete(s);
+    }
+
+    public void deleteById(int id) {
+        reservationRepository.deleteById(id);
     }
 }

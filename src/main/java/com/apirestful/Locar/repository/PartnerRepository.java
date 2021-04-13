@@ -11,5 +11,7 @@ public interface PartnerRepository extends JpaRepository<Partner, Long> {
     default void deleteByRg(int rg) {
         delete(findByRg(rg));
     }
+
+    Partner findById(int id);
     
 }

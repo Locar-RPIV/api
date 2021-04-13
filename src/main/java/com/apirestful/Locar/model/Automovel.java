@@ -20,6 +20,9 @@ public class Automovel implements Serializable {
 
     @NonNull
     private String modelo;
+    
+    @NonNull
+    private String status;
 
     @NonNull
     private int potencia;
@@ -66,8 +69,8 @@ public class Automovel implements Serializable {
         return cpfParceiro;
     }
     
-    public long setCpfParceiro() {
-        return cpfParceiro;
+    public void setCpfParceiro(long cpfParceiro) {
+        this.cpfParceiro = cpfParceiro;
     }
 
     public String getImageUrl() {
@@ -112,6 +115,15 @@ public class Automovel implements Serializable {
         this.modelo = modelo;
     }
 
+    @NonNull
+    public String getStatus() {
+        return modelo;
+    }
+
+    public void setStatus(@NonNull String status) {
+        this.status = status;
+    }
+    
     public int getPotencia() {
         return potencia;
     }
