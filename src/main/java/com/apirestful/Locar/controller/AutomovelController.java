@@ -61,11 +61,8 @@ public class AutomovelController {
     }
 
     @GetMapping("/automobile/status/{status}")
-    public Automovel statusAutomovel(@PathVariable(value = "status") String status) {
-        if (status == automovel.getStatus()) {
-            return automovel;
-        } else
-            return null;
+    public List<Automovel> statusAutomovel(@PathVariable(value = "status") String status) {
+        return automovelService.findByStatus(status);
     }
 
     @PostMapping("/automobile")

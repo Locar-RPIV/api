@@ -16,6 +16,8 @@ public interface AutomovelRepository extends JpaRepository<Automovel, Integer>{
 
     List<Automovel> findByModelo(String modelo);
 
+    List<Automovel> findByStatus(String status);
+
     default void deleteById(int id){
         delete(findById(id));
     }

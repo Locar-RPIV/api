@@ -25,6 +25,10 @@ public class AutomovelService {
     public List<Automovel> findByModelo(String modelo) {
         return automovelRepository.findByModelo(modelo);
     }
+
+    public List<Automovel> findByStatus(String status) {
+        return automovelRepository.findByStatus(status);
+    }
     
     public List<Automovel> findByCpfParceiro(long cpfParceiro) {
         return automovelRepository.findByCpfParceiro(cpfParceiro);
