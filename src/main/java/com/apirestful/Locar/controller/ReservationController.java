@@ -34,7 +34,7 @@ public class ReservationController {
     }
     
     @GetMapping(value="/reservation/{cpf}")
-    public List<Reservation> cpfReserva(@PathVariable(value = "cpf") int cpf) {
+    public List<Reservation> cpfReserva(@PathVariable(value = "cpf") long cpf) {
 
         User user = reservaService.findByCpf(cpf);
 
@@ -54,8 +54,12 @@ public class ReservationController {
         Response response = new Response();
         try {
             Reservation updateReservation = reservaService.findById(reserva.getId());
-            if (reserva.getUser() != null)
+            if (reserva.getUser() != null){
+                long clientCpf = reserva.getUser().getCpf();
+                User user = reservaService.findByCpf(clientCpf);
+                reserva.setUser(user);
                 updateReservation.setUser(reserva.getUser());
+            }
             if (reserva.getPlaca() != null)
                 updateReservation.setPlaca(reserva.getPlaca());
             if (reserva.getDataRetirada() != null)

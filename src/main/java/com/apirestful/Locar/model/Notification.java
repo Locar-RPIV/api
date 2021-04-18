@@ -26,6 +26,10 @@ public class Notification {
         this.branch = branch;
     }
     
+    public String getPartnerName() {
+        return this.partnerName;
+    }
+
     public void setPartnerName(String partnerName) {
         this.partnerName = partnerName;
     }
@@ -44,10 +48,6 @@ public class Notification {
 
     public void setVehiclePlate(String vehiclePlate) {
         this.vehiclePlate = vehiclePlate;
-    }
-
-    public String getPartnerName() {
-        return this.partnerName;
     }
 
     public String getEmailToSend() {

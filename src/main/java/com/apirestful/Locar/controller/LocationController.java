@@ -34,7 +34,7 @@ public class LocationController {
     }
 
     @GetMapping(value = "/location/{cpf}")
-    public List<Location> cpfLocacao(@PathVariable(value = "cpf") int cpf) {
+    public List<Location> cpfLocacao(@PathVariable(value = "cpf") long cpf) {
 
         User user = locacaoService.findByCpf(cpf);
 
@@ -54,8 +54,12 @@ public class LocationController {
         Response response = new Response();
         try {
             Location updateLocation = locacaoService.findById(locacao.getId());
-            if (locacao.getUser() != null)
+            if (locacao.getUser() != null) {
+                long clientCpf = locacao.getUser().getCpf();
+                User user = locacaoService.findByCpf(clientCpf);
+                locacao.setUser(user);
                 updateLocation.setUser(locacao.getUser());
+            }
             if (locacao.getPlaca() != null)
                 updateLocation.setPlaca(locacao.getPlaca());
             if (locacao.getDataLocacao() != null)
