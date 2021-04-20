@@ -117,7 +117,7 @@ public class Automovel implements Serializable {
 
     @NonNull
     public String getStatus() {
-        return modelo;
+        return status;
     }
 
     public void setStatus(@NonNull String status) {
