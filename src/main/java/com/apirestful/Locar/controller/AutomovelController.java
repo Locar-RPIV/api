@@ -27,7 +27,6 @@ public class AutomovelController {
 
     @Autowired
     AutomovelService automovelService;
-    private Automovel automovel;
 
     @GetMapping("/automobile")
     public <Any> Any listAutomoveis() {
