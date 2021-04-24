@@ -4,12 +4,14 @@ import java.util.List;
 
 import com.apirestful.Locar.model.Reservation;
 import com.apirestful.Locar.model.User;
+import com.apirestful.Locar.repository.AutomovelRepository;
 import com.apirestful.Locar.repository.ClientRepository;
 import com.apirestful.Locar.repository.ReservationRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.apirestful.Locar.model.Automovel;
 import com.apirestful.Locar.model.Client;
 
 @Service
@@ -21,12 +23,19 @@ public class ReservationService {
     @Autowired
     private ClientRepository clientRepository;
 
+    @Autowired
+    private AutomovelRepository autoRepository;
+
     public List<Reservation> findByUser(User user) {
         return reservationRepository.findByUser(user);
     }
-
-    public Client findByCpf(long cpf) {
+    
+    public Client findByCpf(String cpf) {
         return clientRepository.findByCpf(cpf);
+    }
+
+    public Automovel findByPlaca(String placa) {
+        return autoRepository.findByPlaca(placa);
     }
 
     public Reservation findById(int id) {

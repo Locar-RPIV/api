@@ -39,7 +39,7 @@ public class ClientController {
     }
 
     @GetMapping("/client/{cpf}")
-    public <Any> Any cpfCliente(@PathVariable(value = "cpf") long cpf) {
+    public <Any> Any cpfCliente(@PathVariable(value = "cpf") String cpf) {
         Response response = new Response();
         try {
             Client client = clientService.findByCpf(cpf);
@@ -52,11 +52,6 @@ public class ClientController {
             response.setMessage("Erro interno.");
             return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @GetMapping("/client/points/{id}")
-    public Client pointsClient(@PathVariable(value = "id") int id) {
-        return clientService.findById(id);
     }
 
     @PostMapping("/client")
@@ -76,7 +71,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/client/{cpf}")
-    public <Any> Any deleteCliente(@PathVariable(value = "cpf") long cpf) {
+    public <Any> Any deleteCliente(@PathVariable(value = "cpf") String cpf) {
         Response response = new Response();
         try {
             clientService.deleteByCpf(cpf);
@@ -93,7 +88,7 @@ public class ClientController {
         Response response = new Response();
         try {
             Client updateClient = clientService.findById(cliente.getId());
-            if (cliente.getCpf() > 0) 
+            if (cliente.getCpf() != null) 
                 updateClient.setCpf(cliente.getCpf());
             if (cliente.getNome() != null)
                 updateClient.setNome(cliente.getNome());
@@ -105,9 +100,7 @@ public class ClientController {
                 updateClient.setEmail(cliente.getEmail());
             if  (cliente.getPassword() != null)
                 updateClient.setPassword(cliente.getPassword());
-            if (cliente.getPontosFidelidade() >= 0)
-                updateClient.setPontosFidelidade(cliente.getPontosFidelidade());
-            if (cliente.getCnh() >= 0)
+            if (cliente.getCnh() != null)
                 updateClient.setCnh(cliente.getCnh());
             if (cliente.getIsPartner()) {
                 updateClient.setPartner(cliente.getIsPartner());

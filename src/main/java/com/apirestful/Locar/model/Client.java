@@ -18,7 +18,7 @@ public class Client extends User  {
     private int id;
 
     @Column(unique = true, name = "cnh", length = 11)
-    private long cnh;
+    private String cnh;
 
     @Column(name = "isPartner")
     private boolean isPartner;
@@ -31,11 +31,11 @@ public class Client extends User  {
         this.id = id;
     }
 
-    public long getCnh() {
+    public String getCnh() {
         return cnh;
     }
-    
-    public void setCnh(long cnh) {
+
+    public void setCnh(String cnh) {
         this.cnh = cnh;
     }
 
@@ -50,14 +50,5 @@ public class Client extends User  {
     public boolean isPartner() {
         return isPartner;
     }
-
-
-    // public Cliente(int id, long cpf, String nome, String telefone, Date dataNascimento, String email, String password,
-    //         int id2, long cnh, boolean admin) {
-    //     super(id, cpf, nome, telefone, dataNascimento, email, password);
-    //     id = id2;
-    //     this.cnh = cnh;
-    //     this.admin = admin;
-    // }
 
 }

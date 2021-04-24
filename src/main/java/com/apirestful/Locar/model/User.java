@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -24,7 +25,7 @@ public class User {
     private int id;
 
     @Column(unique = true, name = "cpf", length = 11)
-    private long cpf;
+    private String cpf;
 
     @Column(name = "nome")
     private String nome;
@@ -44,9 +45,6 @@ public class User {
 
     @Column(name = "admin")
     private boolean admin;
-
-    @Column(name = "pontosFidelidade")
-    private int pontosFidelidade;
 
     public String getEmail() {
         return email;
@@ -72,11 +70,11 @@ public class User {
         this.id = id;
     }
 
-    public long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -112,11 +110,4 @@ public class User {
         this.admin = admin;
     }
 
-    public int getPontosFidelidade() {
-        return pontosFidelidade;
-    }
-
-    public void setPontosFidelidade(int pontosFidelidade) {
-        this.pontosFidelidade = pontosFidelidade;
-    }
 }

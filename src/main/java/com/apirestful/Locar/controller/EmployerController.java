@@ -33,7 +33,7 @@ public class EmployerController {
     }
 
     @GetMapping("/employer/{cpf}")
-    public Employer cpfFuncionario(@PathVariable(value = "cpf") long cpf) {
+    public Employer cpfFuncionario(@PathVariable(value = "cpf") String cpf) {
         return employerService.findByCpf(cpf);
     }
 
@@ -44,7 +44,7 @@ public class EmployerController {
     }
 
     @DeleteMapping("/employer/{cpf}")
-    public <Any> Any deleteFuncionario(@PathVariable(value = "cpf") long cpf) {
+    public <Any> Any deleteFuncionario(@PathVariable(value = "cpf") String cpf) {
         Response response = new Response();
         try {
             employerService.deleteByCpf(cpf);
@@ -60,7 +60,7 @@ public class EmployerController {
         Response response = new Response();
         try {
             Employer updateEmployer = employerService.findById(employer.getId());
-            if (employer.getCpf() > 0) 
+            if (employer.getCpf() != null) 
                 updateEmployer.setCpf(employer.getCpf());
             if (employer.getNome() != null)
                 updateEmployer.setNome(employer.getNome());
@@ -72,7 +72,7 @@ public class EmployerController {
                 updateEmployer.setEmail(employer.getEmail());
             if  (employer.getPassword() != null)
                 updateEmployer.setPassword(employer.getPassword());
-            if (employer.getNumeroPis() >= 0)
+            if (employer.getNumeroPis() != null)
                 updateEmployer.setNumeroPis(employer.getNumeroPis());
 
             employerService.save(updateEmployer);

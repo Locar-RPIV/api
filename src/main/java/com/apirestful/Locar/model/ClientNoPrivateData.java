@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class ClientNoPrivateData {
     int id;
-    long cnh;
+    String cnh;
     boolean isPartner;
     boolean admin;
-    long cpf;
+    String cpf;
     String nome;
     String telefone;
     Date dataNascimento;
     int pontosFidelidade;
-    public ClientNoPrivateData(int id, long cnh, boolean isPartner, long cpf, String nome, String telefone,
+    public ClientNoPrivateData(int id, String cnh, boolean isPartner, String cpf, String nome, String telefone,
             Date dataNascimento, int pontosFidelidade) {
         this.id = id;
         this.cnh = cnh;
@@ -23,7 +23,7 @@ public class ClientNoPrivateData {
         this.dataNascimento = dataNascimento;
         this.pontosFidelidade = pontosFidelidade;
     }
-    public ClientNoPrivateData(int id, long cpf, String nome, String telefone,
+    public ClientNoPrivateData(int id, String cpf, String nome, String telefone,
     Date dataNascimento, int pontosFidelidade) {
         this.id = id;
         this.cnh = cnh;

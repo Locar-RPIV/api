@@ -18,7 +18,7 @@ public class Employer extends User  {
     private int id;
 
     @Column(unique = true, name = "numeroPis", length = 11)
-    private long numeroPis;
+    private String numeroPis;
 
 
     public int getId() {
@@ -29,20 +29,12 @@ public class Employer extends User  {
         this.id = id;
     }
 
-    public long getNumeroPis() {
+    public String getNumeroPis() {
         return numeroPis;
     }
 
-    public void setNumeroPis(long numeroPis) {
+    public void setNumeroPis(String numeroPis) {
         this.numeroPis = numeroPis;
     }
-
-    // public Funcionario(int id, long cpf, String nome, String telefone, Date dataNascimento, String email,
-    //         String password, int id2, long numeroPis, boolean admin) {
-    //     super(id, cpf, nome, telefone, dataNascimento, email, password);
-    //     id = id2;
-    //     this.numeroPis = numeroPis;
-    //     this.admin = admin;
-    // }
 
 }

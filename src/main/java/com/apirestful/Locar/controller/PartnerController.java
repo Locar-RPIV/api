@@ -37,7 +37,7 @@ public class PartnerController {
     }
 
     @GetMapping("/partner/{rg}")
-    public Client cpfPartner(@PathVariable(value = "rg") int rg) {
+    public Client cpfPartner(@PathVariable(value = "rg") String rg) {
         return partnerService.findByRg(rg);
     }
 
@@ -49,7 +49,7 @@ public class PartnerController {
     }
 
     @DeleteMapping("/partner/{rg}")
-    public <Any> Any deletePartner(@PathVariable(value = "rg") int rg) {
+    public <Any> Any deletePartner(@PathVariable(value = "rg") String rg) {
         Response response = new Response();
         try {
             partnerService.deleteByRg(rg);
@@ -65,7 +65,7 @@ public class PartnerController {
         Response response = new Response();
         try {
             Partner updatePartner = partnerService.findById(partner.getId());
-            if (partner.getCpf() > 0) 
+            if (partner.getCpf() != null) 
                 updatePartner.setCpf(partner.getCpf());
             if (partner.getNome() != null)
                 updatePartner.setNome(partner.getNome());
@@ -77,11 +77,9 @@ public class PartnerController {
                 updatePartner.setEmail(partner.getEmail());
             if  (partner.getPassword() != null)
                 updatePartner.setPassword(partner.getPassword());
-            if (partner.getPontosFidelidade() >= 0)
-                updatePartner.setPontosFidelidade(partner.getPontosFidelidade());
-            if (partner.getCnh() >= 0)
+            if (partner.getCnh() != null)
                 updatePartner.setCnh(partner.getCnh());
-            if (partner.getRg() > 0)
+            if (partner.getRg() != null)
                 updatePartner.setRg(partner.getRg());
             if (partner.getIsPartner()) {
                 updatePartner.setPartner(partner.getIsPartner());

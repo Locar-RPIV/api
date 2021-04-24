@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -26,8 +28,9 @@ public class Reservation {
     @JoinColumn(name = "id_user")
     private User user;
 
-    @Column(unique = true, name = "placa")
-    private String placa;
+    @OneToOne
+    @JoinColumn(name = "id_veiculo")
+    private Automovel veiculo;
 
     @Column(name = "dataRetirada")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
@@ -41,12 +44,12 @@ public class Reservation {
         this.id = id;
     }
 
-    public String getPlaca() {
-        return placa;
+    public Automovel getVeiculo() {
+        return veiculo;
     }
 
-    public void setPlaca(String placa) {
-        this.placa = placa;
+    public void setVeiculo(Automovel veiculo) {
+        this.veiculo = veiculo;
     }
 
     public Date getDataRetirada() {

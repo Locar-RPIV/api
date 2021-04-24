@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PartnerRepository extends JpaRepository<Partner, Long> {
 
-    Partner findByRg(int rg);
+    Partner findByRg(String rg);
 
-    default void deleteByRg(int rg) {
+    default void deleteByRg(String rg) {
         delete(findByRg(rg));
     }
 

@@ -14,7 +14,7 @@ public class EmployerService {
     @Autowired
     EmployerRepository employerRepository;
 
-    public Employer findByCpf(Long cpf) {
+    public Employer findByCpf(String cpf) {
         return employerRepository.findByCpf(cpf);
     }
 
@@ -22,7 +22,7 @@ public class EmployerService {
         return employerRepository.findById(id);
     }
 
-    public void deleteByCpf(Long cpf) {
+    public void deleteByCpf(String cpf) {
         employerRepository.deleteByCpf(cpf);
     }
 

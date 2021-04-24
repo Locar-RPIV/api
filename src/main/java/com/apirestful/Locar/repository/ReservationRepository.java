@@ -2,6 +2,7 @@ package com.apirestful.Locar.repository;
 
 import java.util.List;
 
+import com.apirestful.Locar.model.Automovel;
 import com.apirestful.Locar.model.Reservation;
 import com.apirestful.Locar.model.User;
 

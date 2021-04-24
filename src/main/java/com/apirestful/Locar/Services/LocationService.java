@@ -25,7 +25,7 @@ public class LocationService {
         return locationRepository.findByUser(user);
     }
 
-    public Client findByCpf(long cpf) {
+    public Client findByCpf(String cpf) {
         return clientRepository.findByCpf(cpf);
     }
 

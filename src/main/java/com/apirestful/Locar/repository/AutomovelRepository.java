@@ -1,5 +1,6 @@
 package com.apirestful.Locar.repository;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.apirestful.Locar.model.Automovel;
@@ -18,6 +19,8 @@ public interface AutomovelRepository extends JpaRepository<Automovel, Integer>{
 
     List<Automovel> findByStatus(String status);
 
+    Automovel findByPlaca(String placa);
+    
     default void deleteById(int id){
         delete(findById(id));
     }

@@ -1,14 +1,14 @@
 package com.apirestful.Locar.model;
 
 public class PayPartner {
-    int rg;
+    String rg;
     double value;
 
-    public int getRg() {
-        return this.rg;
+    public String getRg() {
+        return rg;
     }
 
-    public void setRg(int rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
 

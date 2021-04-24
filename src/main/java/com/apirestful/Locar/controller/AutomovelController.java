@@ -108,20 +108,28 @@ public class AutomovelController {
                 updateAuto.setMarca(automovel.getMarca());
             if (automovel.getModelo() != null)
                 updateAuto.setModelo(automovel.getModelo());
+            if (automovel.getStatus() != null ) 
+                updateAuto.setStatus(automovel.getStatus());
             if (automovel.getNumeroPortas() != 0)
                 updateAuto.setNumeroPortas(automovel.getNumeroPortas());
             if (automovel.getPlaca() != null)
                 updateAuto.setPlaca(automovel.getPlaca());
-            if (automovel.getPotencia() != 0)
+            if (automovel.getPotencia() != null)
                 updateAuto.setPotencia(automovel.getPotencia());
             if (automovel.getQuilometragem() > -1)
                 updateAuto.setQuilometragem(automovel.getQuilometragem());
-            if (automovel.getRenavan() != 0)
-                updateAuto.setRenavan(automovel.getRenavan());
+            if (automovel.getRenavam() != 0)
+                updateAuto.setRenavam(automovel.getRenavam());
             if (automovel.getTipoCombustivel() != 0)
                 updateAuto.setTipoCombustivel(automovel.getTipoCombustivel());
             if (automovel.getValorLocacao() != 0)
                 updateAuto.setValorLocacao(automovel.getValorLocacao());
+            if(automovel.getCapacidadePortaMalas() != null)
+                updateAuto.setCapacidadePortaMalas(automovel.getCapacidadePortaMalas());
+            if(automovel.getTipoVeiculo() != null)
+                updateAuto.setTipoVeiculo(automovel.getTipoVeiculo());
+            if(automovel.getNumeroAssentos() > 0)
+                updateAuto.setNumeroAssentos(automovel.getNumeroAssentos());
             if (automovel.getCarroParceiro() && automovel.getCpfParceiro() != 0) {
                 updateAuto.setCarroParceiro(automovel.getCarroParceiro());
                 updateAuto.setCpfParceiro(automovel.getCpfParceiro());

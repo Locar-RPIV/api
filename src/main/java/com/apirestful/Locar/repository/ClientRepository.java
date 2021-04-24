@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
     
-    Client findByCpf(long cpf);
+    Client findByCpf(String cpf);
 
-    default void deleteByCpf(long cpf) {
+    default void deleteByCpf(String cpf) {
         delete(findByCpf(cpf));
     }
 

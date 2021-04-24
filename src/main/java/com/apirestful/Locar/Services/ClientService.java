@@ -14,11 +14,11 @@ public class ClientService {
     @Autowired
     ClientRepository clientRepository;
 
-    public Client findByCpf(Long cpf) {
+    public Client findByCpf(String cpf) {
         return clientRepository.findByCpf(cpf);
     }
 
-    public void deleteByCpf(Long cpf) {
+    public void deleteByCpf(String cpf) {
         clientRepository.deleteByCpf(cpf);
     }
 

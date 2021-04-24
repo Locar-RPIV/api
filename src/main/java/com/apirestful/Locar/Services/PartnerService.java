@@ -19,7 +19,7 @@ public class PartnerService {
     @Autowired
     PaymentRepository paymentRepository;
 
-    public Partner findByRg(int rg) {
+    public Partner findByRg(String rg) {
         return partnerRepository.findByRg(rg);
     }
 
@@ -27,7 +27,7 @@ public class PartnerService {
         return partnerRepository.findById(id);
     }
 
-    public void deleteByRg(int rg) {
+    public void deleteByRg(String rg) {
         partnerRepository.deleteByRg(rg);
     }
 

@@ -13,57 +13,84 @@ public class Automovel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_veiculo")
     private int id;
 
     @NonNull
+    @Column(name = "marca")
     private String marca;
 
     @NonNull
+    @Column(name = "modelo")
     private String modelo;
     
     @NonNull
+    @Column(name = "status")
     private String status;
 
     @NonNull
-    private int potencia;
+    @Column(name = "potencia")
+    private String potencia;
 
     @NonNull
+    @Column(name = "placa")
     private String placa;
 
     @NonNull
+    @Column(name = "cor")
     private String cor;
 
     @NonNull
+    @Column(name = "ano")
     private int ano;
 
     @NonNull
+    @Column(name = "tipoCombustivel")
     private int tipoCombustivel;
 
     @NonNull
+    @Column(name = "numeroPortas")
     private int numeroPortas;
 
     @NonNull
+    @Column(name = "quilometragem")
     private long quilometragem;
 
     @NonNull
-    private long renavan;
+    @Column(name = "renavam")
+    private long renavam;
 
     @NonNull
+    @Column(name = "chassi")
     private String chassi;
 
     @NonNull
+    @Column(name = "valorLocacao")
     private double valorLocacao;
 
     @NonNull
+    @Column(name = "carroParceiro")
     private boolean carroParceiro;
 
+    @Column(name = "cpfParceiro")
     private long cpfParceiro;
 
     @NonNull
+    @Column(name = "filial")
     private int filial;
 
     @NonNull
-    private String imageUrl;
+    @Column(name = "imageUrl")
+    private byte[] imageUrl;
+
+    @Column(name = "capacidadePortaMalas")
+    private String capacidadePortaMalas;
+
+    @Column(name = "tipoVeiculo")
+    private String tipoVeiculo;
+
+    @Column(name = "numeroAssentos")
+    private int numeroAssentos;
 
     public long getCpfParceiro() {
         return cpfParceiro;
@@ -73,11 +100,11 @@ public class Automovel implements Serializable {
         this.cpfParceiro = cpfParceiro;
     }
 
-    public String getImageUrl() {
+    public byte[] getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public void setImageUrl(byte[] imageUrl) {
         this.imageUrl = imageUrl;
     }
 
@@ -123,30 +150,52 @@ public class Automovel implements Serializable {
     public void setStatus(@NonNull String status) {
         this.status = status;
     }
-    
-    public int getPotencia() {
+
+    public String getPotencia() {
         return potencia;
     }
 
-    public void setPotencia(int potencia) {
+    public void setPotencia(String potencia) {
         this.potencia = potencia;
     }
 
-    @NonNull
+    public int getNumeroAssentos() {
+        return numeroAssentos;
+    }
+
+    public void setNumeroAssentos(int numeroAssentos) {
+        this.numeroAssentos = numeroAssentos;
+    }
+
+    public String getCapacidadePortaMalas() {
+        return capacidadePortaMalas;
+    }
+
+    public void setCapacidadePortaMalas(String capacidadePortaMalas) {
+        this.capacidadePortaMalas = capacidadePortaMalas;
+    }
+
+    public String getTipoVeiculo() {
+        return tipoVeiculo;
+    }
+
+    public void setTipoVeiculo(String tipoVeiculo) {
+        this.tipoVeiculo = tipoVeiculo;
+    }
+
     public String getPlaca() {
         return placa;
     }
 
-    public void setPlaca(@NonNull String placa) {
+    public void setPlaca(String placa) {
         this.placa = placa;
     }
 
-    @NonNull
     public String getCor() {
         return cor;
     }
 
-    public void setCor(@NonNull String cor) {
+    public void setCor(String cor) {
         this.cor = cor;
     }
 
@@ -182,20 +231,19 @@ public class Automovel implements Serializable {
         this.quilometragem = quilometragem;
     }
 
-    public long getRenavan() {
-        return renavan;
+    public long getRenavam() {
+        return renavam;
     }
 
-    public void setRenavan(long renavan) {
-        this.renavan = renavan;
+    public void setRenavam(long renavam) {
+        this.renavam = renavam;
     }
 
-    @NonNull
     public String getChassi() {
         return chassi;
     }
 
-    public void setChassi(@NonNull String chassi) {
+    public void setChassi(String chassi) {
         this.chassi = chassi;
     }
 
@@ -223,21 +271,4 @@ public class Automovel implements Serializable {
         return null;
     }
 
-    /*public Automovel(int id, @NonNull String marca, @NonNull String modelo, int potencia, @NonNull String placa, @NonNull String cor, int ano, int tipoCombustivel, int numeroPortas, long quilometragem, long renavan, @NonNull String chassi, double valorLocacao, boolean eDeParceiro) {
-        this.id = id;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.potencia = potencia;
-        this.placa = placa;
-        this.cor = cor;
-        this.ano = ano;
-        this.tipoCombustivel = tipoCombustivel;
-        this.numeroPortas = numeroPortas;
-        this.quilometragem = quilometragem;
-        this.renavan = renavan;
-        this.chassi = chassi;
-        this.valorLocacao = valorLocacao;
-        this.eDeParceiro = eDeParceiro;
-    }
-    */
 }

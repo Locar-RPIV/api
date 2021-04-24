@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EmployerRepository extends JpaRepository<Employer, Long> {
 
-    Employer findByCpf(Long cpf);
+    Employer findByCpf(String cpf);
     
-    default void deleteByCpf(long cpf) {
+    default void deleteByCpf(String cpf) {
         delete(findByCpf(cpf));
     }
 

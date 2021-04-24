@@ -3,6 +3,7 @@ package com.apirestful.Locar.controller;
 import java.util.List;
 
 import com.apirestful.Locar.Services.ReservationService;
+import com.apirestful.Locar.model.Automovel;
 import com.apirestful.Locar.model.Reservation;
 import com.apirestful.Locar.model.Response;
 import com.apirestful.Locar.model.User;
@@ -24,44 +25,51 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api")
 @CrossOrigin(origins = "*")
 public class ReservationController {
-    
+
     @Autowired
     ReservationService reservaService;
 
-    @GetMapping(value="/reservation")
+    @GetMapping(value = "/reservation")
     public List<Reservation> listReservas() {
         return reservaService.findAll();
     }
-    
-    @GetMapping(value="/reservation/{cpf}")
-    public List<Reservation> cpfReserva(@PathVariable(value = "cpf") long cpf) {
+
+    @GetMapping(value = "/reservation/{cpf}")
+    public List<Reservation> cpfReserva(@PathVariable(value = "cpf") String cpf) {
 
         User user = reservaService.findByCpf(cpf);
 
         return reservaService.findByUser(user);
     }
-    
-    @PostMapping(value="/reservation")
+
+    @PostMapping(value = "/reservation")
     public Reservation saveReserva(@RequestBody Reservation reserva) {
-        long clientCpf = reserva.getUser().getCpf();
+        String clientCpf = reserva.getUser().getCpf();
         User user = reservaService.findByCpf(clientCpf);
         reserva.setUser(user);
+        String autoPlaca = reserva.getVeiculo().getPlaca();
+        Automovel auto = reservaService.findByPlaca(autoPlaca);
+        reserva.setVeiculo(auto);
         return reservaService.save(reserva);
     }
-    
-    @PutMapping(value="/reservation")
-    public <Any> Any editReserva(@RequestBody Reservation reserva) {  
+
+    @PutMapping(value = "/reservation")
+    public <Any> Any editReserva(@RequestBody Reservation reserva) {
         Response response = new Response();
         try {
             Reservation updateReservation = reservaService.findById(reserva.getId());
-            if (reserva.getUser() != null){
-                long clientCpf = reserva.getUser().getCpf();
+            if (reserva.getUser() != null) {
+                String clientCpf = reserva.getUser().getCpf();
                 User user = reservaService.findByCpf(clientCpf);
                 reserva.setUser(user);
                 updateReservation.setUser(reserva.getUser());
             }
-            if (reserva.getPlaca() != null)
-                updateReservation.setPlaca(reserva.getPlaca());
+            if (reserva.getVeiculo() != null) {
+                String autoPlaca = reserva.getVeiculo().getPlaca();
+                Automovel auto = reservaService.findByPlaca(autoPlaca);
+                reserva.setVeiculo(auto);
+                updateReservation.setVeiculo(reserva.getVeiculo());
+            }
             if (reserva.getDataRetirada() != null)
                 updateReservation.setDataRetirada(reserva.getDataRetirada());
 
@@ -70,7 +78,7 @@ public class ReservationController {
         } catch (Exception e) {
             response.setMessage("Erro interno.");
             return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-        }  
+        }
     }
 
     @DeleteMapping(value = "/reservation/{id}")

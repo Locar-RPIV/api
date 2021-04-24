@@ -20,7 +20,7 @@ public class Payment {
     private int id;
     
     @NonNull
-    private int partnerRG;
+    private String partnerRG;
     
     @NonNull
     private double paymentValue;
@@ -28,7 +28,7 @@ public class Payment {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date date;
 
-    public Payment(int partnerRG, double paymentValue, Date date) {
+    public Payment(String partnerRG, double paymentValue, Date date) {
         this.partnerRG = partnerRG;
         this.paymentValue = paymentValue;
         this.date = date;
@@ -42,11 +42,11 @@ public class Payment {
         this.id = id;
     }
 
-    public int getPartnerRG() {
-        return this.partnerRG;
+    public String getPartnerRG() {
+        return partnerRG;
     }
 
-    public void setPartnerRG(int partnerRG) {
+    public void setPartnerRG(String partnerRG) {
         this.partnerRG = partnerRG;
     }
 
