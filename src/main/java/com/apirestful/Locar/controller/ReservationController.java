@@ -47,8 +47,8 @@ public class ReservationController {
         String clientCpf = reserva.getUser().getCpf();
         User user = reservaService.findByCpf(clientCpf);
         reserva.setUser(user);
-        String autoPlaca = reserva.getVeiculo().getPlaca();
-        Automovel auto = reservaService.findByPlaca(autoPlaca);
+        int autoId = reserva.getVeiculo().getId();
+        Automovel auto = reservaService.findByIdAutomovel(autoId);
         reserva.setVeiculo(auto);
         return reservaService.save(reserva);
     }
@@ -65,8 +65,8 @@ public class ReservationController {
                 updateReservation.setUser(reserva.getUser());
             }
             if (reserva.getVeiculo() != null) {
-                String autoPlaca = reserva.getVeiculo().getPlaca();
-                Automovel auto = reservaService.findByPlaca(autoPlaca);
+                int autoId = reserva.getVeiculo().getId();
+                Automovel auto = reservaService.findByIdAutomovel(autoId);
                 reserva.setVeiculo(auto);
                 updateReservation.setVeiculo(reserva.getVeiculo());
             }

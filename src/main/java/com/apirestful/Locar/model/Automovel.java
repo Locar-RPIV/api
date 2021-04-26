@@ -16,70 +16,54 @@ public class Automovel implements Serializable {
     @Column(name = "id_veiculo")
     private int id;
 
-    @NonNull
     @Column(name = "marca")
     private String marca;
 
-    @NonNull
     @Column(name = "modelo")
     private String modelo;
-    
-    @NonNull
+ 
     @Column(name = "status")
     private String status;
 
-    @NonNull
     @Column(name = "potencia")
     private String potencia;
 
-    @NonNull
     @Column(name = "placa")
     private String placa;
 
-    @NonNull
     @Column(name = "cor")
     private String cor;
 
-    @NonNull
     @Column(name = "ano")
     private int ano;
 
-    @NonNull
     @Column(name = "tipoCombustivel")
     private int tipoCombustivel;
 
-    @NonNull
     @Column(name = "numeroPortas")
     private int numeroPortas;
 
-    @NonNull
     @Column(name = "quilometragem")
     private long quilometragem;
 
-    @NonNull
     @Column(name = "renavam")
-    private long renavam;
+    private String renavam;
 
-    @NonNull
     @Column(name = "chassi")
     private String chassi;
 
-    @NonNull
     @Column(name = "valorLocacao")
     private double valorLocacao;
 
-    @NonNull
     @Column(name = "carroParceiro")
     private boolean carroParceiro;
 
     @Column(name = "cpfParceiro")
     private long cpfParceiro;
 
-    @NonNull
     @Column(name = "filial")
     private int filial;
 
-    @NonNull
     @Column(name = "imageUrl")
     private byte[] imageUrl;
 
@@ -91,6 +75,39 @@ public class Automovel implements Serializable {
 
     @Column(name = "numeroAssentos")
     private int numeroAssentos;
+
+    @Column(name = "aro")
+    private String aro;
+
+    @Column(name = "marcha")
+    private String marcha;
+
+    @Column(name = "amortecedor")
+    private String amortecedor;
+
+    public String getAmortecedor() {
+        return amortecedor;
+    }
+
+    public void setAmortecedor(String amortecedor) {
+        this.amortecedor = amortecedor;
+    }
+
+    public String getAro() {
+        return aro;
+    }
+
+    public void setAro(String aro) {
+        this.aro = aro;
+    }
+
+    public String getMarcha() {
+        return marcha;
+    }
+
+    public void setMarcha(String marcha) {
+        this.marcha = marcha;
+    }
 
     public long getCpfParceiro() {
         return cpfParceiro;
@@ -231,11 +248,11 @@ public class Automovel implements Serializable {
         this.quilometragem = quilometragem;
     }
 
-    public long getRenavam() {
+    public String getRenavam() {
         return renavam;
     }
 
-    public void setRenavam(long renavam) {
+    public void setRenavam(String renavam) {
         this.renavam = renavam;
     }
 

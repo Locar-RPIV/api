@@ -118,7 +118,7 @@ public class AutomovelController {
                 updateAuto.setPotencia(automovel.getPotencia());
             if (automovel.getQuilometragem() > -1)
                 updateAuto.setQuilometragem(automovel.getQuilometragem());
-            if (automovel.getRenavam() != 0)
+            if (automovel.getRenavam() != null)
                 updateAuto.setRenavam(automovel.getRenavam());
             if (automovel.getTipoCombustivel() != 0)
                 updateAuto.setTipoCombustivel(automovel.getTipoCombustivel());

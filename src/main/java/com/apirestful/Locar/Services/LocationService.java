@@ -2,15 +2,13 @@ package com.apirestful.Locar.Services;
 
 import java.util.List;
 
-import com.apirestful.Locar.model.User;
-import com.apirestful.Locar.repository.ClientRepository;
+import com.apirestful.Locar.model.Location;
+import com.apirestful.Locar.model.Reservation;
 import com.apirestful.Locar.repository.LocationRepository;
+import com.apirestful.Locar.repository.ReservationRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.apirestful.Locar.model.Client;
-import com.apirestful.Locar.model.Location;
 
 @Service
 public class LocationService {
@@ -19,14 +17,14 @@ public class LocationService {
     private LocationRepository locationRepository;
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ReservationRepository reservationRepository;
 
-    public List<Location> findByUser(User user) {
-        return locationRepository.findByUser(user);
+    public Reservation findByIdReservation(int id) {
+        return reservationRepository.findById(id);
     }
 
-    public Client findByCpf(String cpf) {
-        return clientRepository.findByCpf(cpf);
+    public Location findByReserva(Reservation reserva) {
+        return locationRepository.findByReserva(reserva);
     }
 
     public Location findById(int id) {
@@ -39,10 +37,6 @@ public class LocationService {
 
     public Location save(Location l) {
         return locationRepository.save(l);
-    }
-
-    public void delete(Location l) {
-    	locationRepository.delete(l);
     }
 
     public void deleteById(int id) {

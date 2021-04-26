@@ -34,8 +34,8 @@ public class ReservationService {
         return clientRepository.findByCpf(cpf);
     }
 
-    public Automovel findByPlaca(String placa) {
-        return autoRepository.findByPlaca(placa);
+    public Automovel findByIdAutomovel(int id) {
+        return autoRepository.findById(id);
     }
 
     public Reservation findById(int id) {

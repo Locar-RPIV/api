@@ -1,6 +1,5 @@
 package com.apirestful.Locar.repository;
 
-import java.util.Collection;
 import java.util.List;
 
 import com.apirestful.Locar.model.Automovel;

@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.apirestful.Locar.Services.LocationService;
 import com.apirestful.Locar.model.Location;
+import com.apirestful.Locar.model.Reservation;
 import com.apirestful.Locar.model.Response;
-import com.apirestful.Locar.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,19 +33,18 @@ public class LocationController {
         return locacaoService.findAll();
     }
 
-    @GetMapping(value = "/location/{cpf}")
-    public List<Location> cpfLocacao(@PathVariable(value = "cpf") String cpf) {
-
-        User user = locacaoService.findByCpf(cpf);
-
-        return locacaoService.findByUser(user);
+    @GetMapping(value = "/location/{id}")
+    public Location cpfLocacao(@PathVariable(value = "id") int id) {
+        return locacaoService.findById(id);
     }
 
     @PostMapping(value = "/location")
     public Location saveLocacao(@RequestBody Location locacao) {
-        String clientCpf = locacao.getUser().getCpf();
-        User user = locacaoService.findByCpf(clientCpf);
-        locacao.setUser(user);
+
+        int reservaId = locacao.getReserva().getId();
+        Reservation reserva = locacaoService.findByIdReservation(reservaId);
+        locacao.setReserva(reserva);
+        
         return locacaoService.save(locacao);
     }
 
@@ -54,14 +53,11 @@ public class LocationController {
         Response response = new Response();
         try {
             Location updateLocation = locacaoService.findById(locacao.getId());
-            if (locacao.getUser() != null) {
-                String clientCpf = locacao.getUser().getCpf();
-                User user = locacaoService.findByCpf(clientCpf);
-                locacao.setUser(user);
-                updateLocation.setUser(locacao.getUser());
+            if (locacao.getReserva() != null) {
+                int reservaId = locacao.getReserva().getId();
+                Reservation reserva = locacaoService.findByIdReservation(reservaId);
+                updateLocation.setReserva(reserva);
             }
-            if (locacao.getPlaca() != null)
-                updateLocation.setPlaca(locacao.getPlaca());
             if (locacao.getDataLocacao() != null)
                 updateLocation.setDataLocacao(locacao.getDataLocacao());
             if (locacao.getDataDevolucao() != null)

@@ -8,10 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.springframework.lang.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -24,12 +22,9 @@ public class Location {
     @Column(name = "id_locacao")
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_user")
-    private User user;
-
-    @Column(unique = true, name = "placa")
-    private String placa;
+    @OneToOne
+    @JoinColumn(name = "id_reserva")
+    private Reservation reserva;
 
     @Column(name = "dataLocacao")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
@@ -38,22 +33,23 @@ public class Location {
     @Column(name = "dataDevolucao")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date dataDevolucao;
-    
-    @NonNull
+  
+    @Column(name = "valorLocacao")
     private double valorLocacao;
     
-    @NonNull
+    @Column(name = "valorCaucao")
     private double valorCaucao;
     
-	@NonNull
+	@Column(name = "valorTotal")
     private double valorTotal;
     
-    @NonNull
+    @Column(name = "quilometragemLocacao")
     private long quilometragemLocacao;
     
-    @NonNull
+    @Column(name = "quilometragemDevolucao")
     private long quilometragemDevolucao;
     
+    @Column(name = "duracao")
     private float duracao;
 
     public int getId() {
@@ -64,12 +60,12 @@ public class Location {
         this.id = id;
     }
 
-    public String getPlaca() {
-        return placa;
+    public Reservation getReserva() {
+        return reserva;
     }
 
-    public void setPlaca(String placa) {
-        this.placa = placa;
+    public void setReserva(Reservation reserva) {
+        this.reserva = reserva;
     }
 
     public Date getDataLocacao() {
@@ -127,14 +123,6 @@ public class Location {
 	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
     
     public float getDuracao() {
         return duracao;
@@ -143,16 +131,5 @@ public class Location {
     public void setDuracao(float duracao) {
         this.duracao = duracao;
     }
-    
-    public float CalculoDuracao(Date dataDevolucao, Date dataLocacao) {
-    	duracao = dataDevolucao.getTime() - dataLocacao.getTime();
-        return duracao;
-    } 
-    
-    public double Calculo(double valorLocacao, double duracao, double valorCaucao) {
-    	valorTotal = (valorLocacao * duracao) - valorCaucao;
-        return valorTotal;
-    }
-
     
 }
