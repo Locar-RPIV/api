@@ -40,7 +40,7 @@ public class AutomovelController {
     }
 
     @GetMapping("/automobile/partner/{cpfParceiro}")
-    public List<Automovel> idAutomovel(@PathVariable(value = "cpfParceiro") long cpfParceiro) {
+    public List<Automovel> idAutomovel(@PathVariable(value = "cpfParceiro") String cpfParceiro) {
         return automovelService.findByCpfParceiro(cpfParceiro);
     }
 
@@ -130,12 +130,12 @@ public class AutomovelController {
                 updateAuto.setTipoVeiculo(automovel.getTipoVeiculo());
             if(automovel.getNumeroAssentos() > 0)
                 updateAuto.setNumeroAssentos(automovel.getNumeroAssentos());
-            if (automovel.getCarroParceiro() && automovel.getCpfParceiro() != 0) {
+            if (automovel.getCarroParceiro() && automovel.getCpfParceiro() != null) {
                 updateAuto.setCarroParceiro(automovel.getCarroParceiro());
                 updateAuto.setCpfParceiro(automovel.getCpfParceiro());
             } else {
                 updateAuto.setCarroParceiro(false);
-                updateAuto.setCpfParceiro(0);
+                updateAuto.setCpfParceiro("");
             }
 
             automovelService.save(updateAuto);

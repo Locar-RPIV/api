@@ -30,7 +30,7 @@ public class AutomovelService {
         return automovelRepository.findByStatus(status);
     }
     
-    public List<Automovel> findByCpfParceiro(long cpfParceiro) {
+    public List<Automovel> findByCpfParceiro(String cpfParceiro) {
         return automovelRepository.findByCpfParceiro(cpfParceiro);
     }
 

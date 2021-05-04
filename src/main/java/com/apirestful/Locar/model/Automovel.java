@@ -59,7 +59,7 @@ public class Automovel implements Serializable {
     private boolean carroParceiro;
 
     @Column(name = "cpfParceiro")
-    private long cpfParceiro;
+    private String cpfParceiro;
 
     @Column(name = "filial")
     private int filial;
@@ -109,11 +109,11 @@ public class Automovel implements Serializable {
         this.marcha = marcha;
     }
 
-    public long getCpfParceiro() {
+    public String getCpfParceiro() {
         return cpfParceiro;
     }
-    
-    public void setCpfParceiro(long cpfParceiro) {
+
+    public void setCpfParceiro(String cpfParceiro) {
         this.cpfParceiro = cpfParceiro;
     }
 

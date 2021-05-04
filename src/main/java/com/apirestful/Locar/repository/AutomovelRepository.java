@@ -10,7 +10,7 @@ public interface AutomovelRepository extends JpaRepository<Automovel, Integer>{
 
     Automovel findById(int id);
 
-    List<Automovel> findByCpfParceiro(long cpf);
+    List<Automovel> findByCpfParceiro(String cpfParceiro);
 
     List<Automovel> findByFilial(int filial);
 

@@ -23,7 +23,6 @@ public class AuthController {
     @Autowired
     UserService userService;
 
-    @SuppressWarnings("unchecked")
     @PostMapping("/auth")
     public <Any> Any auth(@RequestBody Auth auth) {
         String password = auth.getPassword();
