@@ -25,7 +25,6 @@ public class AuthController {
 
     @PostMapping("/auth")
     public <Any> Any auth(@RequestBody Auth auth) {
-        String password = auth.getPassword();
         User user = userService.getUser(auth.getEmail()); 
         Response response = new Response();
         try {
@@ -33,7 +32,7 @@ public class AuthController {
                 response.setMessage("Usuario incorreto.");
                 return (Any) new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
-            if (BCrypt.checkpw(user.getPassword(), password)) {
+            if (BCrypt.checkpw(auth.getPassword(), user.getPassword())) {
                 return ((Any) user);
             }
             response.setMessage("Senha incorreta.");
