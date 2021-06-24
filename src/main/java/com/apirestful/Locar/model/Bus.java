@@ -13,6 +13,18 @@ public class Bus extends Automovel {
     @Column(name = "id_onibus")
     private int id;
 
+    @Column(name = "potencia")
+    private String potencia;
+
+    @Column(name = "tipoCombustivel")
+    private int tipoCombustivel;
+
+    @Column(name = "numeroPortas")
+    private int numeroPortas;
+
+    @Column(name = "capacidadePortaMalas")
+    private String capacidadePortaMalas;
+
     public int getId() {
         return id;
     }
@@ -53,15 +65,5 @@ public class Bus extends Automovel {
         this.capacidadePortaMalas = capacidadePortaMalas;
     }
 
-    @Column(name = "potencia")
-    private String potencia;
-
-    @Column(name = "tipoCombustivel")
-    private int tipoCombustivel;
-
-    @Column(name = "numeroPortas")
-    private int numeroPortas;
-
-    @Column(name = "capacidadePortaMalas")
-    private String capacidadePortaMalas;
+   
 }

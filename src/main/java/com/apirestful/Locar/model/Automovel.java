@@ -67,6 +67,14 @@ public class Automovel implements Serializable {
     @Column(name = "amortecedor")
     private String amortecedor;
 
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
     public String getAmortecedor() {
         return amortecedor;
     }

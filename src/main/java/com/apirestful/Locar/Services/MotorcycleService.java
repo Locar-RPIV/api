@@ -6,7 +6,9 @@ import com.apirestful.Locar.model.Motorcycle;
 import com.apirestful.Locar.repository.MotorcycleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MotorcycleService {
     @Autowired
     MotorcycleRepository motorcycleRepository;

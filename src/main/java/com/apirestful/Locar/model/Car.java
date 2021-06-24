@@ -22,6 +22,9 @@ public class Car extends Automovel {
     @Column(name = "numeroPortas")
     private int numeroPortas;
 
+    @Column(name = "capacidadePortaMalas")
+    private String capacidadePortaMalas;
+    
     public int getId() {
         return id;
     }
@@ -62,6 +65,5 @@ public class Car extends Automovel {
         this.capacidadePortaMalas = capacidadePortaMalas;
     }
 
-    @Column(name = "capacidadePortaMalas")
-    private String capacidadePortaMalas;
+    
 }

@@ -25,11 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api")
 @CrossOrigin(origins = "*")
 public class BikeController {
+    
     @Autowired
     BikeService bikeService;
 
-    @GetMapping("/automobile")
-    public <Any> Any listAutomoveis() {
+    @GetMapping("/bikes")
+    public <Any> Any listBikes() {
         Response response = new Response();
         try {
             return (Any) bikeService.findAll();
@@ -39,33 +40,33 @@ public class BikeController {
         }
     }
 
-    @GetMapping("/automobile/partner/{cpfParceiro}")
-    public List<Bike> idAutomovel(@PathVariable(value = "cpfParceiro") String cpfParceiro) {
+    @GetMapping("/bikes/partner/{cpfParceiro}")
+    public List<Bike> cpfBikePartner(@PathVariable(value = "cpfParceiro") String cpfParceiro) {
         return bikeService.findByCpfParceiro(cpfParceiro);
     }
 
-    @GetMapping("/automobile/{id}")
-    public Bike idAutomovel(@PathVariable(value = "id") int id) {
+    @GetMapping("/bikes/{id}")
+    public Bike idBike(@PathVariable(value = "id") int id) {
         return bikeService.findById(id);
     }
 
-    @GetMapping("/automobile/filial/{id}")
-    public List<Bike> AutomoveisFilial(@PathVariable(value = "id") int id) {
+    @GetMapping("/bikes/filial/{id}")
+    public List<Bike> bikeFilial(@PathVariable(value = "id") int id) {
         return bikeService.findByFilial(id);
     }
 
-    @GetMapping("/automobile/modelo/{modelo}")
-    public List<Bike> modeloFilial(@PathVariable(value = "modelo") String modelo) {
+    @GetMapping("/bikes/modelo/{modelo}")
+    public List<Bike> modeloBikes(@PathVariable(value = "modelo") String modelo) {
         return bikeService.findByModelo(modelo);
     }
 
-    @GetMapping("/automobile/status/{status}")
-    public List<Bike> statusAutomovel(@PathVariable(value = "status") String status) {
+    @GetMapping("/bikes/status/{status}")
+    public List<Bike> statusBikes(@PathVariable(value = "status") String status) {
         return bikeService.findByStatus(status);
     }
 
-    @PostMapping("/automobile")
-    public <Any> Any saveAutomovel(@RequestBody Bike bike) {
+    @PostMapping("/bike")
+    public <Any> Any saveBike(@RequestBody Bike bike) {
         Response response = new Response();
         try {
             bikeService.save(bike);
@@ -77,8 +78,8 @@ public class BikeController {
         return (Any) bike;
     }
 
-    @DeleteMapping("/automobile/{id}")
-    public <Any> Any deleteAutomovel(@PathVariable(value = "id") int id) {
+    @DeleteMapping("/bike/{id}")
+    public <Any> Any deleteBike(@PathVariable(value = "id") int id) {
         Response response = new Response();
         try {
             bikeService.deleteById(id);
@@ -89,36 +90,44 @@ public class BikeController {
         }
     }
 
-    @PutMapping("/automobile")
-    public <Any> Any refreshAutomovel(@RequestBody Automovel automovel) {
+    @PutMapping("/bike")
+    public <Any> Any refreshBike(@RequestBody Bike bike) {
         Response response = new Response();
         try {
-            Bike updateAuto = bikeService.findById(automovel.getId());
-            if (automovel.getAno() != 0)
-                updateAuto.setAno(automovel.getAno());
-            if (automovel.getChassi() != null)
-                updateAuto.setChassi(automovel.getChassi());
-            if (automovel.getCor() != null)
-                updateAuto.setCor(automovel.getCor());
-            if (automovel.getFilial() != 0)
-                updateAuto.setFilial(automovel.getFilial());
-            if (automovel.getMarca() != null)
-                updateAuto.setMarca(automovel.getMarca());
-            if (automovel.getModelo() != null)
-                updateAuto.setModelo(automovel.getModelo());
-            if (automovel.getStatus() != null)
-                updateAuto.setStatus(automovel.getStatus());
-            if (automovel.getQuilometragem() > -1)
-                updateAuto.setQuilometragem(automovel.getQuilometragem());
-            if (automovel.getRenavam() != null)
-                updateAuto.setRenavam(automovel.getRenavam());
-            if (automovel.getValorLocacao() != 0)
-                updateAuto.setValorLocacao(automovel.getValorLocacao());
-            if (automovel.getNumeroAssentos() > 0)
-                updateAuto.setNumeroAssentos(automovel.getNumeroAssentos());
-            if (automovel.getCarroParceiro() && automovel.getCpfParceiro() != null) {
-                updateAuto.setCarroParceiro(automovel.getCarroParceiro());
-                updateAuto.setCpfParceiro(automovel.getCpfParceiro());
+            Bike updateAuto = bikeService.findById(bike.getId());
+            if (bike.getPlaca() != null) 
+                updateAuto.setPlaca(bike.getPlaca());
+            if (bike.getAno() != 0)
+                updateAuto.setAno(bike.getAno());
+            if (bike.getChassi() != null)
+                updateAuto.setChassi(bike.getChassi());
+            if (bike.getCor() != null)
+                updateAuto.setCor(bike.getCor());
+            if (bike.getFilial() != 0)
+                updateAuto.setFilial(bike.getFilial());
+            if (bike.getMarca() != null)
+                updateAuto.setMarca(bike.getMarca());
+            if (bike.getModelo() != null)
+                updateAuto.setModelo(bike.getModelo());
+            if (bike.getStatus() != null)
+                updateAuto.setStatus(bike.getStatus());
+            if (bike.getQuilometragem() > -1)
+                updateAuto.setQuilometragem(bike.getQuilometragem());
+            if (bike.getRenavam() != null)
+                updateAuto.setRenavam(bike.getRenavam());
+            if (bike.getValorLocacao() != 0)
+                updateAuto.setValorLocacao(bike.getValorLocacao());
+            if (bike.getNumeroAssentos() > 0)
+                updateAuto.setNumeroAssentos(bike.getNumeroAssentos());
+            if (bike.getAro() != null)
+                updateAuto.setAro(bike.getAro());
+            if (bike.getMarcha() != null)
+                updateAuto.setMarcha(bike.getMarcha());
+            if (bike.getAmortecedor() != null)
+                updateAuto.setAmortecedor(bike.getAmortecedor());
+            if (bike.getCarroParceiro() && bike.getCpfParceiro() != null) {
+                updateAuto.setCarroParceiro(bike.getCarroParceiro());
+                updateAuto.setCpfParceiro(bike.getCpfParceiro());
             } else {
                 updateAuto.setCarroParceiro(false);
                 updateAuto.setCpfParceiro("");

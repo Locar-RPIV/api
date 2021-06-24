@@ -3,7 +3,6 @@ package com.apirestful.Locar.controller;
 import java.util.List;
 
 import com.apirestful.Locar.Services.BusService;
-import com.apirestful.Locar.model.Automovel;
 import com.apirestful.Locar.model.Bus;
 import com.apirestful.Locar.model.Response;
 
@@ -28,8 +27,8 @@ public class BusController {
     @Autowired
     BusService busService;
 
-    @GetMapping("/automobile")
-    public <Any> Any listAutomoveis() {
+    @GetMapping("/bus")
+    public <Any> Any listBus() {
         Response response = new Response();
         try {
             return (Any) busService.findAll();
@@ -39,33 +38,33 @@ public class BusController {
         }
     }
 
-    @GetMapping("/automobile/partner/{cpfParceiro}")
-    public List<Bus> idAutomovel(@PathVariable(value = "cpfParceiro") String cpfParceiro) {
+    @GetMapping("/bus/partner/{cpfParceiro}")
+    public List<Bus> cpfBusPartner(@PathVariable(value = "cpfParceiro") String cpfParceiro) {
         return busService.findByCpfParceiro(cpfParceiro);
     }
 
-    @GetMapping("/automobile/{id}")
-    public Bus idAutomovel(@PathVariable(value = "id") int id) {
+    @GetMapping("/bus/{id}")
+    public Bus idBus(@PathVariable(value = "id") int id) {
         return busService.findById(id);
     }
 
-    @GetMapping("/automobile/filial/{id}")
-    public List<Bus> AutomoveisFilial(@PathVariable(value = "id") int id) {
+    @GetMapping("/bus/filial/{id}")
+    public List<Bus> busFilial(@PathVariable(value = "id") int id) {
         return busService.findByFilial(id);
     }
 
-    @GetMapping("/automobile/modelo/{modelo}")
-    public List<Bus> modeloFilial(@PathVariable(value = "modelo") String modelo) {
+    @GetMapping("/bus/modelo/{modelo}")
+    public List<Bus> modeloBus(@PathVariable(value = "modelo") String modelo) {
         return busService.findByModelo(modelo);
     }
 
-    @GetMapping("/automobile/status/{status}")
-    public List<Bus> statusAutomovel(@PathVariable(value = "status") String status) {
+    @GetMapping("/bus/status/{status}")
+    public List<Bus> statusBus(@PathVariable(value = "status") String status) {
         return busService.findByStatus(status);
     }
 
-    @PostMapping("/automobile")
-    public <Any> Any saveAutomovel(@RequestBody Bus bus) {
+    @PostMapping("/bus")
+    public <Any> Any saveBus(@RequestBody Bus bus) {
         Response response = new Response();
         try {
             busService.save(bus);
@@ -77,8 +76,8 @@ public class BusController {
         return (Any) bus;
     }
 
-    @DeleteMapping("/automobile/{id}")
-    public <Any> Any deleteAutomovel(@PathVariable(value = "id") int id) {
+    @DeleteMapping("/bus/{id}")
+    public <Any> Any deleteBus(@PathVariable(value = "id") int id) {
         Response response = new Response();
         try {
             busService.deleteById(id);
@@ -89,36 +88,52 @@ public class BusController {
         }
     }
 
-    @PutMapping("/automobile")
-    public <Any> Any refreshAutomovel(@RequestBody Automovel automovel) {
+    @PutMapping("/bus")
+    public <Any> Any refreshAutomovel(@RequestBody Bus bus) {
         Response response = new Response();
         try {
-            Bus updateAuto = busService.findById(automovel.getId());
-            if (automovel.getAno() != 0)
-                updateAuto.setAno(automovel.getAno());
-            if (automovel.getChassi() != null)
-                updateAuto.setChassi(automovel.getChassi());
-            if (automovel.getCor() != null)
-                updateAuto.setCor(automovel.getCor());
-            if (automovel.getFilial() != 0)
-                updateAuto.setFilial(automovel.getFilial());
-            if (automovel.getMarca() != null)
-                updateAuto.setMarca(automovel.getMarca());
-            if (automovel.getModelo() != null)
-                updateAuto.setModelo(automovel.getModelo());
-            if (automovel.getStatus() != null)
-                updateAuto.setStatus(automovel.getStatus());
-            if (automovel.getQuilometragem() > -1)
-                updateAuto.setQuilometragem(automovel.getQuilometragem());
-            if (automovel.getRenavam() != null)
-                updateAuto.setRenavam(automovel.getRenavam());
-            if (automovel.getValorLocacao() != 0)
-                updateAuto.setValorLocacao(automovel.getValorLocacao());
-            if (automovel.getNumeroAssentos() > 0)
-                updateAuto.setNumeroAssentos(automovel.getNumeroAssentos());
-            if (automovel.getCarroParceiro() && automovel.getCpfParceiro() != null) {
-                updateAuto.setCarroParceiro(automovel.getCarroParceiro());
-                updateAuto.setCpfParceiro(automovel.getCpfParceiro());
+            Bus updateAuto = busService.findById(bus.getId());
+            if (bus.getPlaca() != null) 
+                updateAuto.setPlaca(bus.getPlaca());
+            if (bus.getAno() != 0)
+                updateAuto.setAno(bus.getAno());
+            if (bus.getChassi() != null)
+                updateAuto.setChassi(bus.getChassi());
+            if (bus.getCor() != null)
+                updateAuto.setCor(bus.getCor());
+            if (bus.getFilial() != 0)
+                updateAuto.setFilial(bus.getFilial());
+            if (bus.getMarca() != null)
+                updateAuto.setMarca(bus.getMarca());
+            if (bus.getModelo() != null)
+                updateAuto.setModelo(bus.getModelo());
+            if (bus.getStatus() != null)
+                updateAuto.setStatus(bus.getStatus());
+            if (bus.getQuilometragem() > -1)
+                updateAuto.setQuilometragem(bus.getQuilometragem());
+            if (bus.getRenavam() != null)
+                updateAuto.setRenavam(bus.getRenavam());
+            if (bus.getValorLocacao() != 0)
+                updateAuto.setValorLocacao(bus.getValorLocacao());
+            if (bus.getNumeroAssentos() > 0)
+                updateAuto.setNumeroAssentos(bus.getNumeroAssentos());
+            if (bus.getAro() != null)
+                updateAuto.setAro(bus.getAro());
+            if (bus.getMarcha() != null)
+                updateAuto.setMarcha(bus.getMarcha());
+            if (bus.getAmortecedor() != null)
+                updateAuto.setAmortecedor(bus.getAmortecedor());
+            if (bus.getPotencia() != null) 
+                updateAuto.setPotencia(bus.getPotencia());
+            if (bus.getTipoCombustivel() > 0)
+                updateAuto.setTipoCombustivel(bus.getTipoCombustivel());
+            if (bus.getNumeroPortas() > 0) 
+                updateAuto.setNumeroPortas(bus.getNumeroPortas());
+            if (bus.getCapacidadePortaMalas() != null) 
+                updateAuto.setCapacidadePortaMalas(bus.getCapacidadePortaMalas());
+            if (bus.getCarroParceiro() && bus.getCpfParceiro() != null) {
+                updateAuto.setCarroParceiro(bus.getCarroParceiro());
+                updateAuto.setCpfParceiro(bus.getCpfParceiro());
             } else {
                 updateAuto.setCarroParceiro(false);
                 updateAuto.setCpfParceiro("");

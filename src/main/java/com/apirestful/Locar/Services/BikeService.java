@@ -6,7 +6,9 @@ import com.apirestful.Locar.model.Bike;
 import com.apirestful.Locar.repository.BikeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BikeService {
     
     @Autowired

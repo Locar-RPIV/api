@@ -6,7 +6,9 @@ import com.apirestful.Locar.model.Bus;
 import com.apirestful.Locar.repository.BusRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BusService {
     @Autowired
     BusRepository busRepository;

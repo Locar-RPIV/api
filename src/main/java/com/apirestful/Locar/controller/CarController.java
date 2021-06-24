@@ -3,7 +3,6 @@ package com.apirestful.Locar.controller;
 import java.util.List;
 
 import com.apirestful.Locar.Services.CarService;
-import com.apirestful.Locar.model.Automovel;
 import com.apirestful.Locar.model.Car;
 import com.apirestful.Locar.model.Response;
 
@@ -28,8 +27,8 @@ public class CarController {
     @Autowired
     CarService carService;
 
-    @GetMapping("/automobile")
-    public <Any> Any listAutomoveis() {
+    @GetMapping("/car")
+    public <Any> Any listCar() {
         Response response = new Response();
         try {
             return (Any) carService.findAll();
@@ -39,33 +38,33 @@ public class CarController {
         }
     }
 
-    @GetMapping("/automobile/partner/{cpfParceiro}")
-    public List<Car> idAutomovel(@PathVariable(value = "cpfParceiro") String cpfParceiro) {
+    @GetMapping("/car/partner/{cpfParceiro}")
+    public List<Car> idCarPartner(@PathVariable(value = "cpfParceiro") String cpfParceiro) {
         return carService.findByCpfParceiro(cpfParceiro);
     }
 
-    @GetMapping("/automobile/{id}")
-    public Car idAutomovel(@PathVariable(value = "id") int id) {
+    @GetMapping("/car/{id}")
+    public Car idCar(@PathVariable(value = "id") int id) {
         return carService.findById(id);
     }
 
-    @GetMapping("/automobile/filial/{id}")
-    public List<Car> AutomoveisFilial(@PathVariable(value = "id") int id) {
+    @GetMapping("/car/filial/{id}")
+    public List<Car> carFilial(@PathVariable(value = "id") int id) {
         return carService.findByFilial(id);
     }
 
-    @GetMapping("/automobile/modelo/{modelo}")
-    public List<Car> modeloFilial(@PathVariable(value = "modelo") String modelo) {
+    @GetMapping("/car/modelo/{modelo}")
+    public List<Car> modeloCar(@PathVariable(value = "modelo") String modelo) {
         return carService.findByModelo(modelo);
     }
 
-    @GetMapping("/automobile/status/{status}")
-    public List<Car> statusAutomovel(@PathVariable(value = "status") String status) {
+    @GetMapping("/car/status/{status}")
+    public List<Car> statusCar(@PathVariable(value = "status") String status) {
         return carService.findByStatus(status);
     }
 
-    @PostMapping("/automobile")
-    public <Any> Any saveAutomovel(@RequestBody Car car) {
+    @PostMapping("/car")
+    public <Any> Any saveCar(@RequestBody Car car) {
         Response response = new Response();
         try {
             carService.save(car);
@@ -77,7 +76,7 @@ public class CarController {
         return (Any) car;
     }
 
-    @DeleteMapping("/automobile/{id}")
+    @DeleteMapping("/car/{id}")
     public <Any> Any deleteAutomovel(@PathVariable(value = "id") int id) {
         Response response = new Response();
         try {
@@ -89,36 +88,52 @@ public class CarController {
         }
     }
 
-    @PutMapping("/automobile")
-    public <Any> Any refreshAutomovel(@RequestBody Automovel automovel) {
+    @PutMapping("/car")
+    public <Any> Any refreshAutomovel(@RequestBody Car car) {
         Response response = new Response();
         try {
-            Car updateAuto = carService.findById(automovel.getId());
-            if (automovel.getAno() != 0)
-                updateAuto.setAno(automovel.getAno());
-            if (automovel.getChassi() != null)
-                updateAuto.setChassi(automovel.getChassi());
-            if (automovel.getCor() != null)
-                updateAuto.setCor(automovel.getCor());
-            if (automovel.getFilial() != 0)
-                updateAuto.setFilial(automovel.getFilial());
-            if (automovel.getMarca() != null)
-                updateAuto.setMarca(automovel.getMarca());
-            if (automovel.getModelo() != null)
-                updateAuto.setModelo(automovel.getModelo());
-            if (automovel.getStatus() != null)
-                updateAuto.setStatus(automovel.getStatus());
-            if (automovel.getQuilometragem() > -1)
-                updateAuto.setQuilometragem(automovel.getQuilometragem());
-            if (automovel.getRenavam() != null)
-                updateAuto.setRenavam(automovel.getRenavam());
-            if (automovel.getValorLocacao() != 0)
-                updateAuto.setValorLocacao(automovel.getValorLocacao());
-            if (automovel.getNumeroAssentos() > 0)
-                updateAuto.setNumeroAssentos(automovel.getNumeroAssentos());
-            if (automovel.getCarroParceiro() && automovel.getCpfParceiro() != null) {
-                updateAuto.setCarroParceiro(automovel.getCarroParceiro());
-                updateAuto.setCpfParceiro(automovel.getCpfParceiro());
+            Car updateAuto = carService.findById(car.getId());
+            if (car.getPlaca() != null) 
+                updateAuto.setPlaca(car.getPlaca());
+            if (car.getAno() != 0)
+                updateAuto.setAno(car.getAno());
+            if (car.getChassi() != null)
+                updateAuto.setChassi(car.getChassi());
+            if (car.getCor() != null)
+                updateAuto.setCor(car.getCor());
+            if (car.getFilial() != 0)
+                updateAuto.setFilial(car.getFilial());
+            if (car.getMarca() != null)
+                updateAuto.setMarca(car.getMarca());
+            if (car.getModelo() != null)
+                updateAuto.setModelo(car.getModelo());
+            if (car.getStatus() != null)
+                updateAuto.setStatus(car.getStatus());
+            if (car.getQuilometragem() > -1)
+                updateAuto.setQuilometragem(car.getQuilometragem());
+            if (car.getRenavam() != null)
+                updateAuto.setRenavam(car.getRenavam());
+            if (car.getValorLocacao() != 0)
+                updateAuto.setValorLocacao(car.getValorLocacao());
+            if (car.getNumeroAssentos() > 0)
+                updateAuto.setNumeroAssentos(car.getNumeroAssentos());
+            if (car.getAro() != null)
+                updateAuto.setAro(car.getAro());
+            if (car.getMarcha() != null)
+                updateAuto.setMarcha(car.getMarcha());
+            if (car.getAmortecedor() != null)
+                updateAuto.setAmortecedor(car.getAmortecedor());
+            if (car.getPotencia() != null) 
+                updateAuto.setPotencia(car.getPotencia());
+            if (car.getTipoCombustivel() > 0)
+                updateAuto.setTipoCombustivel(car.getTipoCombustivel());
+            if (car.getNumeroPortas() > 0) 
+                updateAuto.setNumeroPortas(car.getNumeroPortas());
+            if (car.getCapacidadePortaMalas() != null) 
+                updateAuto.setCapacidadePortaMalas(car.getCapacidadePortaMalas());
+            if (car.getCarroParceiro() && car.getCpfParceiro() != null) {
+                updateAuto.setCarroParceiro(car.getCarroParceiro());
+                updateAuto.setCpfParceiro(car.getCpfParceiro());
             } else {
                 updateAuto.setCarroParceiro(false);
                 updateAuto.setCpfParceiro("");

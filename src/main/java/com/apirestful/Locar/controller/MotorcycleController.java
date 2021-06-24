@@ -28,8 +28,8 @@ public class MotorcycleController {
     @Autowired
     MotorcycleService motoService;
 
-    @GetMapping("/automobile")
-    public <Any> Any listAutomoveis() {
+    @GetMapping("/motorcycle")
+    public <Any> Any listMotorcycle() {
         Response response = new Response();
         try {
             return (Any) motoService.findAll();
@@ -39,33 +39,33 @@ public class MotorcycleController {
         }
     }
 
-    @GetMapping("/automobile/partner/{cpfParceiro}")
-    public List<Motorcycle> idAutomovel(@PathVariable(value = "cpfParceiro") String cpfParceiro) {
+    @GetMapping("/motorcycle/partner/{cpfParceiro}")
+    public List<Motorcycle> idMotorcyclePartner(@PathVariable(value = "cpfParceiro") String cpfParceiro) {
         return motoService.findByCpfParceiro(cpfParceiro);
     }
 
-    @GetMapping("/automobile/{id}")
-    public Motorcycle idAutomovel(@PathVariable(value = "id") int id) {
+    @GetMapping("/motorcycle/{id}")
+    public Motorcycle idMotorcycle(@PathVariable(value = "id") int id) {
         return motoService.findById(id);
     }
 
-    @GetMapping("/automobile/filial/{id}")
-    public List<Motorcycle> AutomoveisFilial(@PathVariable(value = "id") int id) {
+    @GetMapping("/motorcycle/filial/{id}")
+    public List<Motorcycle> motorcycleFilial(@PathVariable(value = "id") int id) {
         return motoService.findByFilial(id);
     }
 
-    @GetMapping("/automobile/modelo/{modelo}")
-    public List<Motorcycle> modeloFilial(@PathVariable(value = "modelo") String modelo) {
+    @GetMapping("/motorcycle/modelo/{modelo}")
+    public List<Motorcycle> modeloMotorcycle(@PathVariable(value = "modelo") String modelo) {
         return motoService.findByModelo(modelo);
     }
 
-    @GetMapping("/automobile/status/{status}")
-    public List<Motorcycle> statusAutomovel(@PathVariable(value = "status") String status) {
+    @GetMapping("/motorcycle/status/{status}")
+    public List<Motorcycle> statusMotorcycle(@PathVariable(value = "status") String status) {
         return motoService.findByStatus(status);
     }
 
-    @PostMapping("/automobile")
-    public <Any> Any saveAutomovel(@RequestBody Motorcycle moto) {
+    @PostMapping("/motorcycle")
+    public <Any> Any saveMotorcycle(@RequestBody Motorcycle moto) {
         Response response = new Response();
         try {
             motoService.save(moto);
@@ -77,8 +77,8 @@ public class MotorcycleController {
         return (Any) moto;
     }
 
-    @DeleteMapping("/automobile/{id}")
-    public <Any> Any deleteAutomovel(@PathVariable(value = "id") int id) {
+    @DeleteMapping("/motorcycle/{id}")
+    public <Any> Any deleteMotorcycle(@PathVariable(value = "id") int id) {
         Response response = new Response();
         try {
             motoService.deleteById(id);
@@ -89,36 +89,50 @@ public class MotorcycleController {
         }
     }
 
-    @PutMapping("/automobile")
-    public <Any> Any refreshAutomovel(@RequestBody Automovel automovel) {
+    @PutMapping("/motorcycle")
+    public <Any> Any refreshMotocycle(@RequestBody Motorcycle motorcycle) {
         Response response = new Response();
         try {
-            Motorcycle updateAuto = motoService.findById(automovel.getId());
-            if (automovel.getAno() != 0)
-                updateAuto.setAno(automovel.getAno());
-            if (automovel.getChassi() != null)
-                updateAuto.setChassi(automovel.getChassi());
-            if (automovel.getCor() != null)
-                updateAuto.setCor(automovel.getCor());
-            if (automovel.getFilial() != 0)
-                updateAuto.setFilial(automovel.getFilial());
-            if (automovel.getMarca() != null)
-                updateAuto.setMarca(automovel.getMarca());
-            if (automovel.getModelo() != null)
-                updateAuto.setModelo(automovel.getModelo());
-            if (automovel.getStatus() != null)
-                updateAuto.setStatus(automovel.getStatus());
-            if (automovel.getQuilometragem() > -1)
-                updateAuto.setQuilometragem(automovel.getQuilometragem());
-            if (automovel.getRenavam() != null)
-                updateAuto.setRenavam(automovel.getRenavam());
-            if (automovel.getValorLocacao() != 0)
-                updateAuto.setValorLocacao(automovel.getValorLocacao());
-            if (automovel.getNumeroAssentos() > 0)
-                updateAuto.setNumeroAssentos(automovel.getNumeroAssentos());
-            if (automovel.getCarroParceiro() && automovel.getCpfParceiro() != null) {
-                updateAuto.setCarroParceiro(automovel.getCarroParceiro());
-                updateAuto.setCpfParceiro(automovel.getCpfParceiro());
+            Motorcycle updateAuto = motoService.findById(motorcycle.getId());
+            if (motorcycle.getPlaca() != null) 
+                updateAuto.setPlaca(motorcycle.getPlaca());
+            if (motorcycle.getAno() != 0)
+                updateAuto.setAno(motorcycle.getAno());
+            if (motorcycle.getChassi() != null)
+                updateAuto.setChassi(motorcycle.getChassi());
+            if (motorcycle.getCor() != null)
+                updateAuto.setCor(motorcycle.getCor());
+            if (motorcycle.getFilial() != 0)
+                updateAuto.setFilial(motorcycle.getFilial());
+            if (motorcycle.getMarca() != null)
+                updateAuto.setMarca(motorcycle.getMarca());
+            if (motorcycle.getModelo() != null)
+                updateAuto.setModelo(motorcycle.getModelo());
+            if (motorcycle.getStatus() != null)
+                updateAuto.setStatus(motorcycle.getStatus());
+            if (motorcycle.getQuilometragem() > -1)
+                updateAuto.setQuilometragem(motorcycle.getQuilometragem());
+            if (motorcycle.getRenavam() != null)
+                updateAuto.setRenavam(motorcycle.getRenavam());
+            if (motorcycle.getValorLocacao() != 0)
+                updateAuto.setValorLocacao(motorcycle.getValorLocacao());
+            if (motorcycle.getNumeroAssentos() > 0)
+                updateAuto.setNumeroAssentos(motorcycle.getNumeroAssentos());
+            if (motorcycle.getAro() != null)
+                updateAuto.setAro(motorcycle.getAro());
+            if (motorcycle.getMarcha() != null)
+                updateAuto.setMarcha(motorcycle.getMarcha());
+            if (motorcycle.getAmortecedor() != null)
+                updateAuto.setAmortecedor(motorcycle.getAmortecedor());
+            if (motorcycle.getPotencia() != null) 
+                updateAuto.setPotencia(motorcycle.getPotencia());
+            if (motorcycle.getTipoCombustivel() > 0)
+                updateAuto.setTipoCombustivel(motorcycle.getTipoCombustivel());
+            if (motorcycle.getCapacidadePortaMalas() != null) 
+                updateAuto.setCapacidadePortaMalas(motorcycle.getCapacidadePortaMalas());
+            if (motorcycle.getCarroParceiro() && motorcycle.getCpfParceiro() != null) {
+                updateAuto.setCarroParceiro(motorcycle.getCarroParceiro());
+                updateAuto.setCpfParceiro(motorcycle.getCpfParceiro());
             } else {
                 updateAuto.setCarroParceiro(false);
                 updateAuto.setCpfParceiro("");
