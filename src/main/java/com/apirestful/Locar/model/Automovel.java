@@ -21,27 +21,18 @@ public class Automovel implements Serializable {
 
     @Column(name = "modelo")
     private String modelo;
- 
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "potencia")
-    private String potencia;
 
     @Column(name = "placa")
     private String placa;
+ 
+    @Column(name = "status")
+    private String status;
 
     @Column(name = "cor")
     private String cor;
 
     @Column(name = "ano")
     private int ano;
-
-    @Column(name = "tipoCombustivel")
-    private int tipoCombustivel;
-
-    @Column(name = "numeroPortas")
-    private int numeroPortas;
 
     @Column(name = "quilometragem")
     private long quilometragem;
@@ -63,15 +54,6 @@ public class Automovel implements Serializable {
 
     @Column(name = "filial")
     private int filial;
-
-    @Column(name = "imageUrl")
-    private byte[] imageUrl;
-
-    @Column(name = "capacidadePortaMalas")
-    private String capacidadePortaMalas;
-
-    @Column(name = "tipoVeiculo")
-    private String tipoVeiculo;
 
     @Column(name = "numeroAssentos")
     private int numeroAssentos;
@@ -117,14 +99,6 @@ public class Automovel implements Serializable {
         this.cpfParceiro = cpfParceiro;
     }
 
-    public byte[] getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(byte[] imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public int getFilial() {
         return filial;
     }
@@ -168,44 +142,12 @@ public class Automovel implements Serializable {
         this.status = status;
     }
 
-    public String getPotencia() {
-        return potencia;
-    }
-
-    public void setPotencia(String potencia) {
-        this.potencia = potencia;
-    }
-
     public int getNumeroAssentos() {
         return numeroAssentos;
     }
 
     public void setNumeroAssentos(int numeroAssentos) {
         this.numeroAssentos = numeroAssentos;
-    }
-
-    public String getCapacidadePortaMalas() {
-        return capacidadePortaMalas;
-    }
-
-    public void setCapacidadePortaMalas(String capacidadePortaMalas) {
-        this.capacidadePortaMalas = capacidadePortaMalas;
-    }
-
-    public String getTipoVeiculo() {
-        return tipoVeiculo;
-    }
-
-    public void setTipoVeiculo(String tipoVeiculo) {
-        this.tipoVeiculo = tipoVeiculo;
-    }
-
-    public String getPlaca() {
-        return placa;
-    }
-
-    public void setPlaca(String placa) {
-        this.placa = placa;
     }
 
     public String getCor() {
@@ -222,22 +164,6 @@ public class Automovel implements Serializable {
 
     public void setAno(int ano) {
         this.ano = ano;
-    }
-
-    public int getTipoCombustivel() {
-        return tipoCombustivel;
-    }
-
-    public void setTipoCombustivel(int tipoCombustivel) {
-        this.tipoCombustivel = tipoCombustivel;
-    }
-
-    public int getNumeroPortas() {
-        return numeroPortas;
-    }
-
-    public void setNumeroPortas(int numeroPortas) {
-        this.numeroPortas = numeroPortas;
     }
 
     public long getQuilometragem() {
@@ -278,14 +204,6 @@ public class Automovel implements Serializable {
 
     public void setCarroParceiro(boolean carroParceiro) {
         this.carroParceiro = carroParceiro;
-    }
-
-    public Automovel consultar(){
-        return null;
-    }
-
-    public Automovel verificarKM(){
-        return null;
     }
 
 }

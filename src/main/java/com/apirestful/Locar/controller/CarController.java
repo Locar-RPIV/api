@@ -2,8 +2,9 @@ package com.apirestful.Locar.controller;
 
 import java.util.List;
 
-import com.apirestful.Locar.Services.AutomovelService;
+import com.apirestful.Locar.Services.CarService;
 import com.apirestful.Locar.model.Automovel;
+import com.apirestful.Locar.model.Car;
 import com.apirestful.Locar.model.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/api")
 @CrossOrigin(origins = "*")
-public class AutomovelController {
-
+public class CarController {
     @Autowired
-    AutomovelService automovelService;
+    CarService carService;
 
     @GetMapping("/automobile")
     public <Any> Any listAutomoveis() {
         Response response = new Response();
         try {
-            return (Any) automovelService.findAll();
+            return (Any) carService.findAll();
         } catch (Exception e) {
             response.setMessage("Erro interno.");
             return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -40,48 +40,48 @@ public class AutomovelController {
     }
 
     @GetMapping("/automobile/partner/{cpfParceiro}")
-    public List<Automovel> idAutomovel(@PathVariable(value = "cpfParceiro") String cpfParceiro) {
-        return automovelService.findByCpfParceiro(cpfParceiro);
+    public List<Car> idAutomovel(@PathVariable(value = "cpfParceiro") String cpfParceiro) {
+        return carService.findByCpfParceiro(cpfParceiro);
     }
 
     @GetMapping("/automobile/{id}")
-    public Automovel idAutomovel(@PathVariable(value = "id") int id) {
-        return automovelService.findById(id);
+    public Car idAutomovel(@PathVariable(value = "id") int id) {
+        return carService.findById(id);
     }
 
     @GetMapping("/automobile/filial/{id}")
-    public List<Automovel> AutomoveisFilial(@PathVariable(value = "id") int id) {
-        return automovelService.findByFilial(id);
+    public List<Car> AutomoveisFilial(@PathVariable(value = "id") int id) {
+        return carService.findByFilial(id);
     }
 
     @GetMapping("/automobile/modelo/{modelo}")
-    public List<Automovel> modeloFilial(@PathVariable(value = "modelo") String modelo) {
-        return automovelService.findByModelo(modelo);
+    public List<Car> modeloFilial(@PathVariable(value = "modelo") String modelo) {
+        return carService.findByModelo(modelo);
     }
 
     @GetMapping("/automobile/status/{status}")
-    public List<Automovel> statusAutomovel(@PathVariable(value = "status") String status) {
-        return automovelService.findByStatus(status);
+    public List<Car> statusAutomovel(@PathVariable(value = "status") String status) {
+        return carService.findByStatus(status);
     }
 
     @PostMapping("/automobile")
-    public <Any> Any saveAutomovel(@RequestBody Automovel automovel) {
+    public <Any> Any saveAutomovel(@RequestBody Car car) {
         Response response = new Response();
         try {
-            automovelService.save(automovel);
+            carService.save(car);
 
         } catch (Exception e) {
             response.setMessage("Erro interno.");
             return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return (Any) automovel;
+        return (Any) car;
     }
 
     @DeleteMapping("/automobile/{id}")
     public <Any> Any deleteAutomovel(@PathVariable(value = "id") int id) {
         Response response = new Response();
         try {
-            automovelService.deleteById(id);
+            carService.deleteById(id);
             return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             response.setMessage("Erro interno.");
@@ -93,7 +93,7 @@ public class AutomovelController {
     public <Any> Any refreshAutomovel(@RequestBody Automovel automovel) {
         Response response = new Response();
         try {
-            Automovel updateAuto = automovelService.findById(automovel.getId());
+            Car updateAuto = carService.findById(automovel.getId());
             if (automovel.getAno() != 0)
                 updateAuto.setAno(automovel.getAno());
             if (automovel.getChassi() != null)
@@ -102,33 +102,19 @@ public class AutomovelController {
                 updateAuto.setCor(automovel.getCor());
             if (automovel.getFilial() != 0)
                 updateAuto.setFilial(automovel.getFilial());
-            if (automovel.getImageUrl() != null)
-                updateAuto.setImageUrl(automovel.getImageUrl());
             if (automovel.getMarca() != null)
                 updateAuto.setMarca(automovel.getMarca());
             if (automovel.getModelo() != null)
                 updateAuto.setModelo(automovel.getModelo());
-            if (automovel.getStatus() != null ) 
+            if (automovel.getStatus() != null)
                 updateAuto.setStatus(automovel.getStatus());
-            if (automovel.getNumeroPortas() != 0)
-                updateAuto.setNumeroPortas(automovel.getNumeroPortas());
-            if (automovel.getPlaca() != null)
-                updateAuto.setPlaca(automovel.getPlaca());
-            if (automovel.getPotencia() != null)
-                updateAuto.setPotencia(automovel.getPotencia());
             if (automovel.getQuilometragem() > -1)
                 updateAuto.setQuilometragem(automovel.getQuilometragem());
             if (automovel.getRenavam() != null)
                 updateAuto.setRenavam(automovel.getRenavam());
-            if (automovel.getTipoCombustivel() != 0)
-                updateAuto.setTipoCombustivel(automovel.getTipoCombustivel());
             if (automovel.getValorLocacao() != 0)
                 updateAuto.setValorLocacao(automovel.getValorLocacao());
-            if(automovel.getCapacidadePortaMalas() != null)
-                updateAuto.setCapacidadePortaMalas(automovel.getCapacidadePortaMalas());
-            if(automovel.getTipoVeiculo() != null)
-                updateAuto.setTipoVeiculo(automovel.getTipoVeiculo());
-            if(automovel.getNumeroAssentos() > 0)
+            if (automovel.getNumeroAssentos() > 0)
                 updateAuto.setNumeroAssentos(automovel.getNumeroAssentos());
             if (automovel.getCarroParceiro() && automovel.getCpfParceiro() != null) {
                 updateAuto.setCarroParceiro(automovel.getCarroParceiro());
@@ -138,7 +124,7 @@ public class AutomovelController {
                 updateAuto.setCpfParceiro("");
             }
 
-            automovelService.save(updateAuto);
+            carService.save(updateAuto);
             return (Any) new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             response.setMessage("Erro interno.");
