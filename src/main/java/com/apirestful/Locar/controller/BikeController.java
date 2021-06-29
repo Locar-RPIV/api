@@ -3,7 +3,6 @@ package com.apirestful.Locar.controller;
 import java.util.List;
 
 import com.apirestful.Locar.Services.BikeService;
-import com.apirestful.Locar.model.Automovel;
 import com.apirestful.Locar.model.Bike;
 import com.apirestful.Locar.model.Response;
 
