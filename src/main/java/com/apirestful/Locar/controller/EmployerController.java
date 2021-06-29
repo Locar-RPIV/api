@@ -9,6 +9,7 @@ import com.apirestful.Locar.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +40,8 @@ public class EmployerController {
 
     @PostMapping("/employer")
     public Employer saveFuncionario(@RequestBody Employer employer) {
+        String passwordCrypt = BCrypt.hashpw(employer.getPassword(), BCrypt.gensalt());
+        employer.setPassword(passwordCrypt);
         employer.setAdmin(true);
         return employerService.save(employer);
     }
@@ -70,8 +73,11 @@ public class EmployerController {
                 updateEmployer.setDataNascimento(employer.getDataNascimento());
             if (employer.getEmail() != null)
                 updateEmployer.setEmail(employer.getEmail());
-            if  (employer.getPassword() != null)
+            if  (employer.getPassword() != null) {
+                String passwordCrypt = BCrypt.hashpw(employer.getPassword(), BCrypt.gensalt());
+                employer.setPassword(passwordCrypt);
                 updateEmployer.setPassword(employer.getPassword());
+            }
             if (employer.getNumeroPis() != null)
                 updateEmployer.setNumeroPis(employer.getNumeroPis());
 

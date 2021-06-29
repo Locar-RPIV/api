@@ -6,11 +6,12 @@ import com.apirestful.Locar.model.Client;
 import com.apirestful.Locar.repository.ClientRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ClientService {
-    
+
     @Autowired
     ClientRepository clientRepository;
 

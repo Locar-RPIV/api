@@ -9,6 +9,7 @@ import com.apirestful.Locar.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +32,7 @@ public class ClientController {
     @GetMapping("/client")
     public List<Client> listClientes() {
         List<Client> clients = clientService.findAll();
-        for (Client client : clients) {
-            client.setEmail("private data");
-            client.setPassword("private data");
-        }
+        
         return clients;
     }
 
@@ -58,12 +56,11 @@ public class ClientController {
     public <Any> Any saveCliente(@RequestBody Client cliente) {
         Response response = new Response();
         try {
+            String passwordCrypt = BCrypt.hashpw(cliente.getPassword(), BCrypt.gensalt());
+            cliente.setPassword(passwordCrypt);
             cliente.setAdmin(false);
             cliente.setPartner(cliente.isPartner());
-            Client client = clientService.save(cliente);
-            client.setEmail("private data");
-            client.setPassword("private data");
-            return (Any) client;
+            return (Any) clientService.save(cliente);
         } catch (Exception e) {
             response.setMessage("Erro interno.");
             return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -98,8 +95,11 @@ public class ClientController {
                 updateClient.setDataNascimento(cliente.getDataNascimento());
             if (cliente.getEmail() != null)
                 updateClient.setEmail(cliente.getEmail());
-            if  (cliente.getPassword() != null)
+            if  (cliente.getPassword() != null) {
+                String passwordCrypt = BCrypt.hashpw(cliente.getPassword(), BCrypt.gensalt());
+                cliente.setPassword(passwordCrypt);
                 updateClient.setPassword(cliente.getPassword());
+            }
             if (cliente.getCnh() != null)
                 updateClient.setCnh(cliente.getCnh());
             if (cliente.getIsPartner()) {

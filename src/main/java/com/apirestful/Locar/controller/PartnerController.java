@@ -13,6 +13,7 @@ import com.apirestful.Locar.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,8 @@ public class PartnerController {
 
     @PostMapping("/partner")
     public Partner savePartner(@RequestBody Partner partner) {
+        String passwordCrypt = BCrypt.hashpw(partner.getPassword(), BCrypt.gensalt());
+        partner.setPassword(passwordCrypt);
         partner.setAdmin(false);
         partner.setPartner(true);
         return partnerService.save(partner);
@@ -75,8 +78,11 @@ public class PartnerController {
                 updatePartner.setDataNascimento(partner.getDataNascimento());
             if (partner.getEmail() != null)
                 updatePartner.setEmail(partner.getEmail());
-            if  (partner.getPassword() != null)
+            if  (partner.getPassword() != null) {
+                String passwordCrypt = BCrypt.hashpw(partner.getPassword(), BCrypt.gensalt());
+                partner.setPassword(passwordCrypt);
                 updatePartner.setPassword(partner.getPassword());
+            }
             if (partner.getCnh() != null)
                 updatePartner.setCnh(partner.getCnh());
             if (partner.getRg() != null)
