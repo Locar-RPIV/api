@@ -7,8 +7,6 @@ import com.apirestful.Locar.model.Branch;
 import com.apirestful.Locar.model.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +26,8 @@ public class BranchController {
     @Autowired
     BranchService branchService;
 
+    Response responseErro = new Response("Erro interno.");
+
     @GetMapping("/branch")
     public List<Branch> listaFiliais(){
         return branchService.findAll();
@@ -35,13 +35,12 @@ public class BranchController {
 
     @GetMapping("/branch/{id}")
     public <Any> Any idBranch(@PathVariable(value = "id")int id){
+        
         Branch branch = branchService.findById(id);
-        Response response = new Response();
         if (branch != null) {
             return (Any) branch;
         }
-        response.setMessage("Erro interno.");
-        return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        return (Any) new Response("Erro interno.");
     }
 
     @PostMapping("/branch")
@@ -50,20 +49,17 @@ public class BranchController {
     }
 
     @DeleteMapping("/branch/{id}")
-    public <Any> Any deleteBranch(@PathVariable(value = "id")int id){
-        Response response = new Response();
+    public <Any> Any deleteBranch(@PathVariable(value = "id")int id) {
         try {
             branchService.deleteById(id);
-            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return (Any) new Response("Filial removida.");
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
     @PutMapping("/branch")
-    public <Any> Any refreshBranch(@RequestBody Branch branch){
-        Response response = new Response();
+    public <Any> Any editBranch(@RequestBody Branch branch) {
         try {
             Branch updateBranch = branchService.findById(branch.getId());
             if (branch.getCnpj() != 0)
@@ -71,11 +67,9 @@ public class BranchController {
             if (branch.getNome() != null)
                 updateBranch.setNome(branch.getNome());
 
-            branchService.save(updateBranch);
-            return (Any) new ResponseEntity<>(HttpStatus.OK);
+            return (Any) branchService.save(updateBranch);
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 

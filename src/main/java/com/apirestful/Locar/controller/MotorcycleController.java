@@ -7,8 +7,6 @@ import com.apirestful.Locar.model.Motorcycle;
 import com.apirestful.Locar.model.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,14 +25,14 @@ public class MotorcycleController {
     @Autowired
     MotorcycleService motoService;
 
+    Response responseErro = new Response("Erro interno.");
+
     @GetMapping("/motorcycle")
     public <Any> Any listMotorcycle() {
-        Response response = new Response();
         try {
             return (Any) motoService.findAll();
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
@@ -65,32 +63,26 @@ public class MotorcycleController {
 
     @PostMapping("/motorcycle")
     public <Any> Any saveMotorcycle(@RequestBody Motorcycle moto) {
-        Response response = new Response();
         try {
             motoService.save(moto);
-
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
         return (Any) moto;
     }
 
     @DeleteMapping("/motorcycle/{id}")
     public <Any> Any deleteMotorcycle(@PathVariable(value = "id") int id) {
-        Response response = new Response();
         try {
             motoService.deleteById(id);
-            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return (Any) new Response("Veiculo removido.");
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
     @PutMapping("/motorcycle")
-    public <Any> Any refreshMotocycle(@RequestBody Motorcycle motorcycle) {
-        Response response = new Response();
+    public <Any> Any editMotocycle(@RequestBody Motorcycle motorcycle) {
         try {
             Motorcycle updateAuto = motoService.findById(motorcycle.getId());
             if (motorcycle.getPlaca() != null) 
@@ -136,12 +128,9 @@ public class MotorcycleController {
                 updateAuto.setCarroParceiro(false);
                 updateAuto.setCpfParceiro("");
             }
-
-            motoService.save(updateAuto);
-            return (Any) new ResponseEntity<>(HttpStatus.OK);
+            return (Any) motoService.save(updateAuto);
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 }

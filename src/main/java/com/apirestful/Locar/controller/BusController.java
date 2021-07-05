@@ -7,8 +7,6 @@ import com.apirestful.Locar.model.Bus;
 import com.apirestful.Locar.model.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,15 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class BusController {
     @Autowired
     BusService busService;
+    Response responseErro = new Response("Erro interno.");
 
     @GetMapping("/bus")
     public <Any> Any listBus() {
-        Response response = new Response();
         try {
             return (Any) busService.findAll();
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
@@ -65,32 +62,26 @@ public class BusController {
 
     @PostMapping("/bus")
     public <Any> Any saveBus(@RequestBody Bus bus) {
-        Response response = new Response();
         try {
             busService.save(bus);
-
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
         return (Any) bus;
     }
 
     @DeleteMapping("/bus/{id}")
     public <Any> Any deleteBus(@PathVariable(value = "id") int id) {
-        Response response = new Response();
         try {
             busService.deleteById(id);
-            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return (Any) new Response("Veiculo apagado.");
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
     @PutMapping("/bus")
-    public <Any> Any refreshAutomovel(@RequestBody Bus bus) {
-        Response response = new Response();
+    public <Any> Any editBus(@RequestBody Bus bus) {
         try {
             Bus updateAuto = busService.findById(bus.getId());
             if (bus.getPlaca() != null) 
@@ -139,11 +130,9 @@ public class BusController {
                 updateAuto.setCpfParceiro("");
             }
 
-            busService.save(updateAuto);
-            return (Any) new ResponseEntity<>(HttpStatus.OK);
+            return (Any) busService.save(updateAuto);
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 }

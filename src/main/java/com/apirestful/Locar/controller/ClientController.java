@@ -7,8 +7,6 @@ import com.apirestful.Locar.model.Client;
 import com.apirestful.Locar.model.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,32 +27,29 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
+    Response responseErro = new Response("Erro interno.");
+
     @GetMapping("/client")
     public List<Client> listClientes() {
         List<Client> clients = clientService.findAll();
-        
         return clients;
     }
 
     @GetMapping("/client/{cpf}")
     public <Any> Any cpfCliente(@PathVariable(value = "cpf") String cpf) {
-        Response response = new Response();
         try {
             Client client = clientService.findByCpf(cpf);
             if (client != null) {
                 return (Any) client;
             }
-            response.setMessage("Cliente nao encontrado");
-            return (Any) new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            return (Any) new Response("Cliente não encontrado.");
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
     @PostMapping("/client")
     public <Any> Any saveCliente(@RequestBody Client cliente) {
-        Response response = new Response();
         try {
             String passwordCrypt = BCrypt.hashpw(cliente.getPassword(), BCrypt.gensalt());
             cliente.setPassword(passwordCrypt);
@@ -62,27 +57,23 @@ public class ClientController {
             cliente.setPartner(cliente.isPartner());
             return (Any) clientService.save(cliente);
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
     @DeleteMapping("/client/{cpf}")
-    public <Any> Any deleteCliente(@PathVariable(value = "cpf") String cpf) {
-        Response response = new Response();
+    public <Any> Any deleteCliente(@PathVariable(value = "cpf") String cpf) { 
         try {
             clientService.deleteByCpf(cpf);
-            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return (Any) new Response("Cliente removido.");
         } catch (Exception e) {
-            response.setMessage("Erro interno");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
 
     }
 
     @PutMapping("/client")
-    public <Any> Any refreshCliente(@RequestBody Client cliente) {
-        Response response = new Response();
+    public <Any> Any editCliente(@RequestBody Client cliente) {
         try {
             Client updateClient = clientService.findById(cliente.getId());
             if (cliente.getCpf() != null) 
@@ -108,13 +99,9 @@ public class ClientController {
                 updateClient.setPartner(false);
             }
 
-            clientService.save(updateClient);
-            return (Any) new ResponseEntity<>(HttpStatus.OK);
+            return (Any) clientService.save(updateClient);
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
-
-
     }
 }

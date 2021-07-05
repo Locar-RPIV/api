@@ -27,6 +27,8 @@ public class ReservationController {
     @Autowired
     ReservationService reservaService;
 
+    Response responseErro = new Response("Erro interno.");
+
     @GetMapping(value = "/reservation")
     public List<Reservation> listReservas() {
         return reservaService.findAll();
@@ -74,7 +76,7 @@ public class ReservationController {
 
             return (Any) reservaService.save(updateReservation);
         } catch (Exception e) {
-            return (Any) new Response("Erro ao alterar reserva.");
+            return (Any) responseErro;
         }
     }
 
@@ -84,7 +86,7 @@ public class ReservationController {
             reservaService.deleteById(id);
             return (Any) new Response("Reserva apagada.");
         } catch (Exception e) {
-            return (Any) new Response("Erro ao apagar reserva.");
+            return (Any) responseErro;
         }
     }
 

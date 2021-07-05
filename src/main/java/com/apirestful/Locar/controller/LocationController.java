@@ -8,8 +8,6 @@ import com.apirestful.Locar.model.Reservation;
 import com.apirestful.Locar.model.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,13 +26,15 @@ public class LocationController {
     @Autowired
     LocationService locacaoService;
 
+    Response responseErro = new Response("Erro interno.");
+
     @GetMapping(value = "/location")
     public List<Location> listLocacoes() {
         return locacaoService.findAll();
     }
 
     @GetMapping(value = "/location/{id}")
-    public Location cpfLocacao(@PathVariable(value = "id") int id) {
+    public Location idLocacao(@PathVariable(value = "id") int id) {
         return locacaoService.findById(id);
     }
 
@@ -50,7 +50,6 @@ public class LocationController {
 
     @PutMapping(value="/location")
     public <Any> Any editLocacao(@RequestBody Location locacao) {
-        Response response = new Response();
         try {
             Location updateLocation = locacaoService.findById(locacao.getId());
             if (locacao.getReserva() != null) {
@@ -75,23 +74,19 @@ public class LocationController {
             if (locacao.getDuracao() >= 0.0)
                 updateLocation.setDuracao(locacao.getDuracao());    
         
-            locacaoService.save(updateLocation);
-            return (Any) new ResponseEntity<>(HttpStatus.OK);
+            return (Any) locacaoService.save(updateLocation);
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
     @DeleteMapping(value = "/location/{id}")
     public <Any> Any deleteLocacao(@PathVariable(value = "id") int id) {
-        Response response = new Response();
         try {
             locacaoService.deleteById(id);
-            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return (Any) new Response("Locação apagada.");
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
