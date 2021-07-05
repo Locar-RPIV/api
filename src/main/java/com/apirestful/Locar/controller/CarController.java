@@ -7,8 +7,6 @@ import com.apirestful.Locar.model.Car;
 import com.apirestful.Locar.model.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,14 +25,14 @@ public class CarController {
     @Autowired
     CarService carService;
 
+    Response responseErro = new Response("Erro interno.");
+
     @GetMapping("/car")
     public <Any> Any listCar() {
-        Response response = new Response();
         try {
             return (Any) carService.findAll();
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
@@ -65,32 +63,26 @@ public class CarController {
 
     @PostMapping("/car")
     public <Any> Any saveCar(@RequestBody Car car) {
-        Response response = new Response();
         try {
             carService.save(car);
-
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
         return (Any) car;
     }
 
     @DeleteMapping("/car/{id}")
-    public <Any> Any deleteAutomovel(@PathVariable(value = "id") int id) {
-        Response response = new Response();
+    public <Any> Any deleteCar(@PathVariable(value = "id") int id) {
         try {
             carService.deleteById(id);
-            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return (Any) new Response("Veiculo apagado.");
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
     @PutMapping("/car")
-    public <Any> Any refreshAutomovel(@RequestBody Car car) {
-        Response response = new Response();
+    public <Any> Any editCar(@RequestBody Car car) {
         try {
             Car updateAuto = carService.findById(car.getId());
             if (car.getPlaca() != null) 
@@ -139,11 +131,9 @@ public class CarController {
                 updateAuto.setCpfParceiro("");
             }
 
-            carService.save(updateAuto);
-            return (Any) new ResponseEntity<>(HttpStatus.OK);
+            return (Any) carService.save(updateAuto);
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 }

@@ -7,8 +7,6 @@ import com.apirestful.Locar.model.Bike;
 import com.apirestful.Locar.model.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,14 +26,14 @@ public class BikeController {
     @Autowired
     BikeService bikeService;
 
+    Response responseErro = new Response("Erro interno.");
+
     @GetMapping("/bikes")
     public <Any> Any listBikes() {
-        Response response = new Response();
         try {
             return (Any) bikeService.findAll();
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
@@ -66,32 +64,27 @@ public class BikeController {
 
     @PostMapping("/bike")
     public <Any> Any saveBike(@RequestBody Bike bike) {
-        Response response = new Response();
         try {
             bikeService.save(bike);
 
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) new Response("Erro interno.");
         }
         return (Any) bike;
     }
 
     @DeleteMapping("/bike/{id}")
     public <Any> Any deleteBike(@PathVariable(value = "id") int id) {
-        Response response = new Response();
         try {
             bikeService.deleteById(id);
-            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return (Any) new Response("Veiculo apagado.");
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) new Response("Erro interno");
         }
     }
 
     @PutMapping("/bike")
-    public <Any> Any refreshBike(@RequestBody Bike bike) {
-        Response response = new Response();
+    public <Any> Any editBike(@RequestBody Bike bike) {
         try {
             Bike updateAuto = bikeService.findById(bike.getId());
             if (bike.getPlaca() != null) 
@@ -132,11 +125,9 @@ public class BikeController {
                 updateAuto.setCpfParceiro("");
             }
 
-            bikeService.save(updateAuto);
-            return (Any) new ResponseEntity<>(HttpStatus.OK);
+            return (Any) bikeService.save(updateAuto);
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 }

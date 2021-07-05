@@ -7,8 +7,6 @@ import com.apirestful.Locar.model.Employer;
 import com.apirestful.Locar.model.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,6 +25,8 @@ public class EmployerController {
 
     @Autowired
     EmployerService employerService;
+
+    Response responseErro = new Response("Erro interno.");
 
     @GetMapping("/employer")
     public List<Employer> listFuncionarios() {
@@ -48,19 +48,16 @@ public class EmployerController {
 
     @DeleteMapping("/employer/{cpf}")
     public <Any> Any deleteFuncionario(@PathVariable(value = "cpf") String cpf) {
-        Response response = new Response();
         try {
             employerService.deleteByCpf(cpf);
-            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return (Any) new Response("Funcionário removido.");
         } catch (Exception e) {
-            response.setMessage("Erro interno");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
     @PutMapping("/employer")
-    public <Any> Any refreshFuncionario(@RequestBody Employer employer) {
-        Response response = new Response();
+    public <Any> Any editFuncionario(@RequestBody Employer employer) {
         try {
             Employer updateEmployer = employerService.findById(employer.getId());
             if (employer.getCpf() != null) 
@@ -81,11 +78,9 @@ public class EmployerController {
             if (employer.getNumeroPis() != null)
                 updateEmployer.setNumeroPis(employer.getNumeroPis());
 
-            employerService.save(updateEmployer);
-            return (Any) new ResponseEntity<>(HttpStatus.OK);
+            return (Any) employerService.save(updateEmployer);
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
     

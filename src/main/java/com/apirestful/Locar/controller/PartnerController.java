@@ -32,6 +32,8 @@ public class PartnerController {
     @Autowired
     PartnerService partnerService;
 
+    Response responseErro = new Response("Erro interno.");
+
     @GetMapping("/partner")
     public List<Partner> listPartners() {
         return partnerService.findAll();
@@ -53,19 +55,16 @@ public class PartnerController {
 
     @DeleteMapping("/partner/{rg}")
     public <Any> Any deletePartner(@PathVariable(value = "rg") String rg) {
-        Response response = new Response();
         try {
             partnerService.deleteByRg(rg);
-            return (Any) new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return (Any) new Response("Parceiro removido.");
         } catch (Exception e) {
-            response.setMessage("Erro interno");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
     @PutMapping("/partner")
-    public <Any> Any refreshPartner(@RequestBody Partner partner) {
-        Response response = new Response();
+    public <Any> Any editPartner(@RequestBody Partner partner) {
         try {
             Partner updatePartner = partnerService.findById(partner.getId());
             if (partner.getCpf() != null) 
@@ -92,12 +91,9 @@ public class PartnerController {
             } else {
                 updatePartner.setPartner(false);
             }
-        
-            partnerService.save(updatePartner);
-            return (Any) new ResponseEntity<>(HttpStatus.OK);
+            return (Any) partnerService.save(updatePartner);
         } catch (Exception e) {
-            response.setMessage("Erro interno.");
-            return (Any) new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+            return (Any) responseErro;
         }
     }
 
