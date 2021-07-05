@@ -31,6 +31,9 @@ public class Reservation {
     @JoinColumn(name = "id_veiculo")
     private Automovel veiculo;
 
+    @Column(name = "status")
+    private String status;
+
     @Column(name = "dataRetirada")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private Date dataRetirada;
@@ -57,6 +60,14 @@ public class Reservation {
 
     public void setDataRetirada(Date dataRetirada) {
         this.dataRetirada = dataRetirada;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public User getUser() {
