@@ -5,7 +5,6 @@ import java.util.List;
 import com.apirestful.Locar.Services.ClientService;
 import com.apirestful.Locar.model.Client;
 import com.apirestful.Locar.model.Response;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.CrossOrigin;
